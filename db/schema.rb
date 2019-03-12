@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_14_015134) do
+ActiveRecord::Schema.define(version: 2019_03_12_172440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 2019_02_14_015134) do
     t.integer "seen_by_count", default: 0, null: false
     t.string "ranges_string"
     t.integer "guest_group_id"
+    t.boolean "breakout"
     t.index ["author_id"], name: "index_discussions_on_author_id"
     t.index ["created_at"], name: "index_discussions_on_created_at"
     t.index ["group_id"], name: "index_discussions_on_group_id"
