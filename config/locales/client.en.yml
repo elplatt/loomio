@@ -294,6 +294,7 @@ en:
     start_group: 'New organization'
     explore: 'Public groups'
     start_thread: New thread
+    start_breakout: New breakout
     start_decision: New decision
     aria_labels:
       heading: 'Sidebar'
