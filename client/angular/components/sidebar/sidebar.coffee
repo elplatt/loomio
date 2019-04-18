@@ -68,5 +68,8 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
 
     $scope.startThread = ->
       ModalService.open 'DiscussionStartModal', discussion: -> Records.discussions.build(groupId: $scope.currentGroup().id)
+
+    $scope.startBreakout = ->
+        alert('Not implemented')
   ]
 ]

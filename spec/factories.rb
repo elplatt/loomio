@@ -1,4 +1,7 @@
 FactoryBot.define do
+  factory :breakout do
+    
+  end
 
   factory :blacklisted_password do
     string { "MyString" }
