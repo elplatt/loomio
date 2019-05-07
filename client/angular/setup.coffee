@@ -103,6 +103,7 @@ setupAngularDigest = ($rootScope, $injector) ->
 setupAngularModal = ($rootScope, $injector, $mdDialog) ->
   $mdDialog = $injector.get('$mdDialog')
   ModalService.setOpenMethod (name, resolve = {}) ->
+    console.log('ModalService.open()')
     modal                  = $injector.get(name)
     resolve.preventClose   = resolve.preventClose or (-> false)
     AppConfig.currentModal = $mdDialog.alert
@@ -118,7 +119,9 @@ setupAngularModal = ($rootScope, $injector, $mdDialog) ->
       onComplete:     focusElement
 
     $mdDialog.show(AppConfig.currentModal)
-      .then    -> EventBus.broadcast $rootScope, 'modalOpened', modal
+      .then    ->
+        console.log('$mdDialog.show().then()')
+        EventBus.broadcast $rootScope, 'modalOpened', modal
       .finally -> delete AppConfig.currentModal
 
 buildScope = ($rootScope, $mdDialog) ->
