@@ -103,26 +103,21 @@ setupAngularDigest = ($rootScope, $injector) ->
 setupAngularModal = ($rootScope, $injector, $mdDialog) ->
   $mdDialog = $injector.get('$mdDialog')
   ModalService.setOpenMethod (name, resolve = {}) ->
-    console.log('ModalService.open()')
     modal                  = $injector.get(name)
     resolve.preventClose   = resolve.preventClose or (-> false)
-    AppConfig.currentModal = $mdDialog.alert
-      role:           'dialog'
-      backdrop:       'static'
+    
+    AppConfig.currentModal = $mdDialog.show
+      hasBackdrop:    true
       scope:          buildScope($rootScope, $mdDialog)
       templateUrl:    modal.templateUrl
       controller:     modal.controller
-      size:           modal.size or ''
       resolve:        resolve
       escapeToClose:  !resolve.preventClose()
-      ariaLabel:      I18n.t(ariaFor(modal))
-      onComplete:     focusElement
-
-    $mdDialog.show(AppConfig.currentModal)
-      .then    ->
-        console.log('$mdDialog.show().then()')
+      onComplete:     ->
+        focusElement
         EventBus.broadcast $rootScope, 'modalOpened', modal
-      .finally -> delete AppConfig.currentModal
+      onRemoving:     ->
+        delete AppConfig.currentModal
 
 buildScope = ($rootScope, $mdDialog) ->
   $scope = $rootScope.$new(true)
