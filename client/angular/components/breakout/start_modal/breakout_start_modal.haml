@@ -1,0 +1,14 @@
+%md-dialog.breakout-modal
+  .lmo-disabled-form{ng-show: "isDisabled"}
+  %md-toolbar
+    .md-toolbar-tools.lmo-flex.lmo-flex__space-between
+      %i.mdi.mdi-forum
+      %h1.lmo-h1.modal-title
+        %span{translate: "breakout_form.new_breakout_title"}
+      %dismiss_modal_button{aria-hidden: "true"}
+
+  %md-dialog-content.md-body-1.lmo-slide-animation{ng-switch: "step"}
+    %breakout_discussion_form.animated{ng-switch-when: "discussion"}
+    %breakout_ranked_choice_form.animated{ng-switch-when: "ranked_choice"}
+  %md-dialog-actions
+    %breakout_form_actions{breakout: "breakout"}

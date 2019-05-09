@@ -12,7 +12,7 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
   restrict: 'E'
   templateUrl: 'generated/components/sidebar/sidebar.html'
   replace: true
-  controller: ['$scope', ($scope) ->
+  controller: ['$scope', '$rootScope', ($scope, $rootScope) ->
     $scope.currentState = ""
     $scope.showSidebar = true
     InboxService.load()
@@ -67,9 +67,10 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
       ModalService.open 'GroupModal', group: -> Records.groups.build()
 
     $scope.startThread = ->
-      ModalService.open 'DiscussionStartModal', discussion: -> Records.discussions.build(groupId: $scope.currentGroup().id)
+      ModalService.open 'DiscussionStartModal', discussion: ->
+        Records.discussions.build(groupId: $scope.currentGroup().id)      
 
     $scope.startBreakout = ->
-        alert('Not implemented')
+      ModalService.open 'BreakoutStartModal'
   ]
 ]
