@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_18_173323) do
+ActiveRecord::Schema.define(version: 2019_05_10_192051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -186,6 +186,12 @@ ActiveRecord::Schema.define(version: 2019_04_18_173323) do
     t.integer "seen_by_count", default: 0, null: false
     t.string "ranges_string"
     t.integer "guest_group_id"
+    t.integer "num_breakouts"
+    t.boolean "has_random"
+    t.boolean "has_short"
+    t.boolean "has_all"
+    t.integer "num_stages"
+    t.integer "current_stage"
     t.index ["author_id"], name: "index_discussions_on_author_id"
     t.index ["created_at"], name: "index_discussions_on_created_at"
     t.index ["group_id"], name: "index_discussions_on_group_id"
@@ -594,6 +600,7 @@ ActiveRecord::Schema.define(version: 2019_04_18_173323) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "versions_count", default: 0
+    t.integer "stage"
     t.index ["participant_id"], name: "index_stances_on_participant_id"
     t.index ["poll_id"], name: "index_stances_on_poll_id"
   end
@@ -650,6 +657,10 @@ ActiveRecord::Schema.define(version: 2019_04_18_173323) do
     t.integer "user_id"
     t.text "body"
     t.index ["user_id"], name: "index_user_deactivation_responses_on_user_id"
+  end
+
+  create_table "user_discussion_users", force: :cascade do |t|
+    t.integer "breakout"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
