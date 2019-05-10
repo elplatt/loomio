@@ -1,5 +1,7 @@
 Records = require 'shared/services/records'
 AppConfig = require 'shared/services/app_config'
+LmoUrlService = require 'shared/services/lmo_url_service'
+
 
 angular.module('loomioApp').factory 'DiscussionStartModal', ->
   templateUrl: 'generated/components/discussion/start_modal/discussion_start_modal.html'
@@ -15,4 +17,12 @@ angular.module('loomioApp').factory 'DiscussionStartModal', ->
     
     $scope.currentStep = 'save'
     
+    $scope.submit = () ->
+      if $scope.currentStep == 'save'
+        alert 'Creating Ranked Choice Poll'
+        $scope.poll = Records.polls.build
+          title:       LmoUrlService.params().title
+          pollType:    'ranked_choice'
+          groupId:     parseInt(LmoUrlService.params().group_id)
+        $scope.currentStep = 'ranked_choice'
   ]
