@@ -31,6 +31,8 @@ module.exports = class DiscussionModel extends BaseModel
     title: ''
     description: ''
     forkedEventIds: []
+    num_breakouts: 0
+    num_stages: 0
 
   audienceValues: ->
     name: @group().name

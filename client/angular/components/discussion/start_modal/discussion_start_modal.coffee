@@ -19,7 +19,6 @@ angular.module('loomioApp').factory 'DiscussionStartModal', ->
     
     $scope.submit = () ->
       if $scope.currentStep == 'save'
-        alert 'Creating Ranked Choice Poll'
         $scope.poll = Records.polls.build
           title:       LmoUrlService.params().title
           pollType:    'ranked_choice'

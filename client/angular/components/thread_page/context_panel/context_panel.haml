@@ -32,6 +32,9 @@
         %span{translate: "thread_context.forked_from"}>
         %a{lmo-href-for: "discussion.forkedEvent()"}>
           {{discussion.forkedEvent().discussion().title}}
+      %span
+        %span{aria-hidden: "true"}>·
+        Stage 0/{{discussion.num_stages}}
     .lmo-badge.lmo-pointer{translate: "common.privacy.closed", ng-if: "discussion.closedAt", md-colors: "{color: 'warn-600', 'border-color': 'warn-600'}"}
       %md-tooltip {{ discussion.closedAt | exactDateWithTime }}
     %outlet.lmo-flex{name: "after-thread-title", model: "discussion"}
