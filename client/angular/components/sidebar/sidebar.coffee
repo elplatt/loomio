@@ -68,7 +68,6 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
 
     $scope.startThread = ->
       d = Records.discussions.build(groupId: $scope.currentGroup().id)
-      console.log(d)
       ModalService.open 'DiscussionStartModal', discussion: -> d
              
 
