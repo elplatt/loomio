@@ -16,6 +16,8 @@ class DiscussionSerializer < ActiveModel::Serializer
              :key,
              :title,
              :description,
+             :num_stages,
+             :num_breakouts,
              :ranges,
              :items_count,
              :last_comment_at,

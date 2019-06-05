@@ -13,7 +13,7 @@ module.exports = class DiscussionModel extends BaseModel
   @uniqueIndices: ['id', 'key']
   @indices: ['groupId', 'authorId']
   @draftParent: 'group'
-  @draftPayloadAttributes: ['title', 'description']
+  @draftPayloadAttributes: ['title', 'description', 'num_stages', 'num_breakouts']
   @serializableAttributes: AppConfig.permittedParams.discussion
 
   afterConstruction: ->
@@ -31,8 +31,8 @@ module.exports = class DiscussionModel extends BaseModel
     title: ''
     description: ''
     forkedEventIds: []
-    num_breakouts: 0
-    num_stages: 0
+    numBreakouts: 0
+    numStages: 0
 
   audienceValues: ->
     name: @group().name
