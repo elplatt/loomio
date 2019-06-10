@@ -13,7 +13,7 @@ module.exports = class DiscussionModel extends BaseModel
   @uniqueIndices: ['id', 'key']
   @indices: ['groupId', 'authorId']
   @draftParent: 'group'
-  @draftPayloadAttributes: ['title', 'description', 'num_stages', 'num_breakouts']
+  @draftPayloadAttributes: ['title', 'description', 'numStages', 'numBreakouts']
   @serializableAttributes: AppConfig.permittedParams.discussion
 
   afterConstruction: ->
