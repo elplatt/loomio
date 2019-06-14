@@ -22,6 +22,7 @@ $controller = ($scope, $injector) ->
   $scope.renderSidebar    = _.includes(['large', 'extralarge'], viewportSize())
   $scope.isLoggedIn       = -> AbilityService.isLoggedIn()
   $scope.isEmailVerified  = -> AbilityService.isEmailVerified()
+  $scope.isSiteAdmin      = -> AbilityService.isSiteAdmin()
   $scope.keyDown          = (event) -> broadcastKeyEvent($scope, event)
   $scope.loggedIn = ->
     $scope.pageError = null

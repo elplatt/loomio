@@ -12,6 +12,9 @@ angular.module('loomioApp').directive 'navbar', ['$rootScope', ($rootScope) ->
     $scope.logo = ->
       AppConfig.theme.app_logo_src
 
+    $scope.isSiteAdmin = ->
+      AbilityService.isSiteAdmin()
+
     $scope.isLoggedIn = ->
       AbilityService.isLoggedIn()
     $scope.toggleSidebar = -> EventBus.broadcast $rootScope, 'toggleSidebar'

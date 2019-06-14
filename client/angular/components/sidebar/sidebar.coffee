@@ -14,7 +14,7 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
   replace: true
   controller: ['$scope', '$rootScope', ($scope, $rootScope) ->
     $scope.currentState = ""
-    $scope.showSidebar = true
+    $scope.showSidebar = false
     InboxService.load()
 
     $scope.canStartThreads = ->
@@ -29,9 +29,9 @@ angular.module('loomioApp').directive 'sidebar', ['$mdMedia', '$mdSidenav', ($md
 
     EventBus.listen $scope, 'toggleSidebar', (event, show) ->
       if !_.isUndefined(show)
-        $scope.showSidebar = show
+        $scope.showSidebar = show && AbilityService.isSiteAdmin()
       else
-        $scope.showSidebar = !$scope.showSidebar
+        $scope.showSidebar = !$scope.showSidebar && AbilityService.isSiteAdmin()
 
     EventBus.listen $scope, 'currentComponent', (el, component) ->
       $scope.currentState = component

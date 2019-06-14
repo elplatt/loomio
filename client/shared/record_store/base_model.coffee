@@ -199,7 +199,8 @@ module.exports =
         throw data
       else
         @clonedFrom = undefined
-        this.id = data.events[0].eventable.id
+        if data.hasOwnProperty('events') && data.events.length > 0
+          this.id = data.events[0].eventable.id
         data
 
     clearErrors: ->
