@@ -1,6 +1,7 @@
 Session  = require 'shared/services/session'
 Records  = require 'shared/services/records'
 EventBus = require 'shared/services/event_bus'
+AbilityService = require 'shared/services/ability_service'
 
 { listenForLoading } = require 'shared/helpers/listen'
 { myLastStanceFor }  = require 'shared/helpers/poll'
@@ -10,6 +11,8 @@ angular.module('loomioApp').directive 'pollCommonCard', ->
   templateUrl: 'generated/components/poll/common/card/poll_common_card.html'
   replace: true
   controller: ['$scope', ($scope) ->
+    $scope.isSiteAdmin = AbilityService.isSiteAdmin()
+    
     Records.polls.findOrFetchById($scope.poll.key)
 
     $scope.buttonPressed = false
