@@ -14,7 +14,12 @@ class DiscussionReader < ApplicationRecord
   def self.for(user:, discussion:)
     if user&.is_logged_in?
       begin
-        find_or_create_by(user: user, discussion: discussion)
+        user_discussion = find_by(user: user, discussion: discussion)
+        if user_discussion.nil?
+          next_sequence = where(discussion: discussion).count
+          user_discussion = create(user: user, discussion: discussion, sequence: next_sequence)
+        end
+        user_discussion
       rescue ActiveRecord::RecordNotUnique
         retry
       end
