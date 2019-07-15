@@ -1,0 +1,23 @@
+%h1 Listing user_breakouts
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Breakout
+      %th
+      %th
+      %th
+
+  %tbody
+    - @user_breakouts.each do |user_breakout|
+      %tr
+        %td= user_breakout.user_id
+        %td= user_breakout.breakout_id
+        %td= link_to 'Show', user_breakout
+        %td= link_to 'Edit', edit_user_breakout_path(user_breakout)
+        %td= link_to 'Destroy', user_breakout, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New User breakout', new_user_breakout_path

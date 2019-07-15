@@ -62,6 +62,8 @@ class Discussion < ApplicationRecord
 
   has_many :discussion_readers, dependent: :destroy
 
+  has_many :breakouts
+
   scope :search_for, ->(fragment) do
      joins("INNER JOIN users ON users.id = discussions.author_id")
     .where("discussions.title ilike :fragment OR users.name ilike :fragment", fragment: "%#{fragment}%")

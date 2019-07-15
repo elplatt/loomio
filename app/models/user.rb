@@ -131,6 +131,8 @@ class User < ApplicationRecord
           class_name: 'UserDeactivationResponse',
           dependent: :destroy
 
+  has_and_belongs_to_many :breakouts, through: :breakouts_users
+
   before_save :set_avatar_initials
   initialized_with_token :unsubscribe_token,        -> { Devise.friendly_token }
   initialized_with_token :email_api_key,            -> { SecureRandom.hex(16) }

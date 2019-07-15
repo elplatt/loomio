@@ -21,10 +21,24 @@
   .md-input-compensate
     %md-input-container.lmo-flex.lmo-flex__center{layout: "row"}
       .poll-common-checkbox-option__text.md-list-item-text.lmo-flex__grow
-        %h3{translate: "discussion_form.group_settings"}
-        %p.md-caption{translate: "discussion_form.num_stages_helptext"}
+        %h3{translate: "discussion_form.num_stages"}
       %input.lmo-number-input{type: "number", min: "1", ng-model: "discussion.numStages"}
 
+    .md-block.poll-common-multiple-choice.poll-common-checkbox-option
+      .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
+        %h3{translate: "discussion_form.has_single_group"}
+      %md-checkbox{ng-model: "discussion.hasSingleGroup"}
+      
+    .md-block.poll-common-multiple-choice.poll-common-checkbox-option
+      .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
+        %h3{translate: "discussion_form.has_random_network"}
+      %md-checkbox{ng-model: "discussion.hasRandomNetwork"}
+
+    .md-block.poll-common-multiple-choice.poll-common-checkbox-option
+      .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
+        %h3{translate: "discussion_form.has_short_path_network"}
+      %md-checkbox{ng-model: "discussion.hasShortPathNetwork"}
+    
     %md-list.discussion-form__options
 
       %md-list-item.discussion-form__privacy-form{ng-if: "showPrivacyForm()"}

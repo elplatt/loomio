@@ -23,6 +23,7 @@ module.exports = class DiscussionModel extends BaseModel
     HasMentions.apply @, 'description'
     HasTranslations.apply @
     HasGuestGroup.apply @
+    console.log "constructed " + @discussionReaderId
 
   defaultValues: =>
     private: null

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_27_172430) do
+ActiveRecord::Schema.define(version: 2019_07_10_175742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(version: 2019_06_27_172430) do
     t.integer "prime"
     t.integer "remainder"
     t.integer "group"
+    t.bigint "discussion_id"
+    t.index ["discussion_id"], name: "index_breakouts_on_discussion_id"
+  end
+
+  create_table "breakouts_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "breakout_id", null: false
   end
 
   create_table "cohorts", id: :serial, force: :cascade do |t|
@@ -658,6 +665,13 @@ ActiveRecord::Schema.define(version: 2019_06_27_172430) do
     t.index ["canonical_host"], name: "index_usage_reports_on_canonical_host"
   end
 
+  create_table "user_breakouts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "breakout_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_deactivation_responses", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.text "body"
@@ -771,4 +785,5 @@ ActiveRecord::Schema.define(version: 2019_06_27_172430) do
     t.index ["hookable_type", "hookable_id"], name: "index_webhooks_on_hookable_type_and_hookable_id"
   end
 
+  add_foreign_key "breakouts", "discussions"
 end

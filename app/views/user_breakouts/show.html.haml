@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @user_breakout.user_id
+%p
+  %b Breakout:
+  = @user_breakout.breakout_id
+
+= link_to 'Edit', edit_user_breakout_path(@user_breakout)
+\|
+= link_to 'Back', user_breakouts_path

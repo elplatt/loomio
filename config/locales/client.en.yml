@@ -436,8 +436,10 @@ en:
     privacy_private: 'The thread will only be visible to members of {{group}}.'
     privacy_organisation: 'The thread will be visible to members of {{parent}} and members of {{group}}.'
     fork_notice: 'A new thread will be created with {{count}} items from {{title}}'
-    group_settings: 'Group Settings'
-    num_stages_helptext: 'Number of stages'
+    num_stages: 'Number of stages'
+    has_single_group: 'Single group treatment'
+    has_random_network: 'Random network treatment'
+    has_short_path_network: 'Short path network treatment'
 
   announcement:
     audiences:

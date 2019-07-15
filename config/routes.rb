@@ -1,4 +1,5 @@
 Loomio::Application.routes.draw do
+  resources :user_breakouts
   if !Rails.env.production?
     namespace :dev do
       namespace :discussions do

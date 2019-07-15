@@ -18,10 +18,6 @@ angular.module('loomioApp').factory 'DiscussionStartModal', ->
     
     $scope.currentStep = 'save'
     
-    console.log $location.search()
-    console.log LmoUrlService.params()
-    console.log LmoUrlService.params
-    
     $scope.submit = () ->
       if $scope.currentStep == 'save'
         $scope.discussion.save().then ->

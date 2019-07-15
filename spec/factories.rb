@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :user_breakout do
+    user_id { 1 }
+    breakout_id { 1 }
+  end
   factory :breakout do
     
   end
