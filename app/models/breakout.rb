@@ -25,14 +25,17 @@ class Breakout < ApplicationRecord
     end
 
     def self.for(discussion:, stage:, user:)
+        # See if breakout already exists for user/discussion/stage
         breakout = user.breakouts.find_by(discussion: discussion, stage: stage)
         if breakout.nil?
+            # Breakout not assigned yet, get group and remainder for current user/discussion/stage
             sequence = discussion.discussion_readers.find_by(user: user).sequence
             g = group_for(stage: stage, sequence: sequence, team_size: TEAM_SIZE)
             breakout = find_by(discussion:g[:discussion], stage: g[:stage], prime: g[:p], remainder: g[:remainder], group: g[:group])
-        end
-        if breakout.nil?
-            breakout = create(discussion:discussion, stage: stage, prime: p, remainder: remainder, group: group)
+            # If the breakout does not exist, create it
+            if breakout.nil?
+                breakout = create(discussion:discussion, stage: stage, prime: g[:p], remainder: g[:remainder], group: g[:group])
+            end
         end
         breakout.users << user
         breakout

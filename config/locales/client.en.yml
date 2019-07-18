@@ -439,7 +439,7 @@ en:
     num_stages: 'Number of stages'
     has_single_group: 'Single group treatment'
     has_random_network: 'Random network treatment'
-    has_short_path_network: 'Short path network treatment'
+    has_long_path_network: 'Long path network treatment'
 
   announcement:
     audiences:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_175742) do
+ActiveRecord::Schema.define(version: 2019_07_17_183003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_175742) do
     t.datetime "dismissed_at"
     t.string "read_ranges_string"
     t.integer "sequence"
+    t.integer "treatment"
     t.index ["discussion_id"], name: "index_motion_read_logs_on_discussion_id"
     t.index ["user_id", "discussion_id"], name: "index_discussion_readers_on_user_id_and_discussion_id", unique: true
   end
@@ -204,6 +205,10 @@ ActiveRecord::Schema.define(version: 2019_07_10_175742) do
     t.boolean "has_all"
     t.integer "num_stages"
     t.integer "current_stage"
+    t.boolean "has_single_group"
+    t.boolean "has_random_network"
+    t.boolean "has_short_path_network"
+    t.boolean "has_long"
     t.index ["author_id"], name: "index_discussions_on_author_id"
     t.index ["created_at"], name: "index_discussions_on_created_at"
     t.index ["group_id"], name: "index_discussions_on_group_id"

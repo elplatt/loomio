@@ -27,17 +27,17 @@
     .md-block.poll-common-multiple-choice.poll-common-checkbox-option
       .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
         %h3{translate: "discussion_form.has_single_group"}
-      %md-checkbox{ng-model: "discussion.hasSingleGroup"}
+      %md-checkbox{ng-model: "discussion.hasAll"}
       
     .md-block.poll-common-multiple-choice.poll-common-checkbox-option
       .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
         %h3{translate: "discussion_form.has_random_network"}
-      %md-checkbox{ng-model: "discussion.hasRandomNetwork"}
+      %md-checkbox{ng-model: "discussion.hasRandom"}
 
     .md-block.poll-common-multiple-choice.poll-common-checkbox-option
       .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
-        %h3{translate: "discussion_form.has_short_path_network"}
-      %md-checkbox{ng-model: "discussion.hasShortPathNetwork"}
+        %h3{translate: "discussion_form.has_long_path_network"}
+      %md-checkbox{ng-model: "discussion.hasLong"}
     
     %md-list.discussion-form__options
 

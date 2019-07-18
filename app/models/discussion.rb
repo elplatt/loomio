@@ -71,7 +71,7 @@ class Discussion < ApplicationRecord
 
   scope :weighted_search_for, ->(query, user, opts = {}) do
     query = connection.quote(query)
-    select(:id, :key, :title, :num_stages, :result_group_name, :description, :last_activity_at, :rank, "#{query}::text as query")
+    select(:id, :key, :title, :num_stages, :has_all, :has_random, :has_long, :result_group_name, :description, :last_activity_at, :rank, "#{query}::text as query")
     .select("ts_headline(discussions.description, plainto_tsquery(#{query}), 'ShortWord=0') as blurb")
     .from(SearchVector.search_for(query, user, opts))
     .joins("INNER JOIN discussions on subquery.discussion_id = discussions.id")
