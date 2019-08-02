@@ -5,6 +5,9 @@ class UserSerializer < ActiveModel::Serializer
              :avatar_url, :email_hash, :time_zone, :locale, :location, :created_at,
              :email_verified, :has_password, :last_seen_at, :email
 
+  has_many :breakouts, serializer: BreakoutSerializer, root: :breakouts
+
+
   def name
     object.name ||
     (include_email? && email) ||

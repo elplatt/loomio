@@ -14,6 +14,7 @@ module.exports = class UserModel extends BaseModel
     @hasMany 'versions'
     @hasMany 'identities'
     @hasMany 'reactions'
+    @hasMany 'breakouts'
 
   localeName: ->
     (_.find(AppConfig.locales, (h) => h.key == @locale) or {}).name
