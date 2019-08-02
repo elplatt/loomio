@@ -33,7 +33,7 @@ module.exports = new class AbilityService
 
   canForkComment: (comment) ->
     @canMoveThread(comment.discussion()) &&
-    !comment.isReply()
+    !comment.isReply
 
   canStartPoll: (model) ->
     return unless model
@@ -151,7 +151,7 @@ module.exports = new class AbilityService
   canEditComment: (comment) ->
     Session.user().isMemberOf(comment.group()) and
     Session.user().isAuthorOf(comment) and
-    (comment.isMostRecent() or comment.group().membersCanEditComments)
+    (comment.isMostRecent or comment.group().membersCanEditComments)
 
   canDeleteComment: (comment) ->
     (Session.user().isMemberOf(comment.group()) and
