@@ -3,6 +3,10 @@ class LoggedOutUser
   include AvatarInitials
   attr_accessor :name, :email, :token, :membership_token, :avatar_initials, :locale, :legal_accepted, :recaptcha
 
+  def breakouts
+    []
+  end
+
   alias :read_attribute_for_serialization :send
 
   def initialize(name: nil, email: nil, token: nil, membership_token: nil, locale: I18n.locale)

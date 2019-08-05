@@ -12,15 +12,14 @@ class DiscussionReader < ApplicationRecord
   update_counter_cache :discussion, :seen_by_count
 
   after_create do |discussion_reader|
-    puts "creatd discussion reader"
-    Breakout.for(discussion: discussion_reader.discussion, stage: 0, user: discussion_reader.user)
+    if not user.is_admin
+      Breakout.for(discussion: discussion_reader.discussion, stage: 0, user: discussion_reader.user)
+    end
   end
 
   def self.for(user:, discussion:)
-    puts "DiscussionReader.for"
     if user&.is_logged_in?
       begin
-        puts "Finding record for user/discussion"
         user_discussion = find_by(user: user, discussion: discussion)
         if user_discussion.nil?
           puts "user discussion nil"

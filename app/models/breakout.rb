@@ -31,7 +31,7 @@ class Breakout < ApplicationRecord
             # Breakout not assigned yet, get group and remainder for current user/discussion/stage
             sequence = discussion.discussion_readers.find_by(user: user).sequence
             g = group_for(stage: stage, sequence: sequence, team_size: TEAM_SIZE)
-            breakout = find_by(discussion:g[:discussion], stage: g[:stage], prime: g[:p], remainder: g[:remainder], group: g[:group])
+            breakout = find_by(discussion:g[:discussion], stage: g[:stage], remainder: g[:remainder], group: g[:group])
             # If the breakout does not exist, create it
             if breakout.nil?
                 breakout = create(discussion:discussion, stage: stage, prime: g[:p], remainder: g[:remainder], group: g[:group])
