@@ -22,8 +22,7 @@ class DiscussionReader < ApplicationRecord
       begin
         user_discussion = find_by(user: user, discussion: discussion)
         if user_discussion.nil?
-          puts "user discussion nil"
-          next_sequence = where(discussion: discussion).count
+          next_sequence = DiscussionReader.joins(:user).where(discussion_id:discussion.id, users: {is_admin:false}).length
           user_discussion = create(user: user, discussion: discussion, sequence: next_sequence)
         end
         user_discussion
