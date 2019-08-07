@@ -16,6 +16,7 @@ class Comment < ApplicationRecord
   has_one :group, through: :discussion
   belongs_to :user
   belongs_to :parent, class_name: 'Comment'
+  belongs_to :breakout
 
   alias_attribute :author, :user
   alias_attribute :author_id, :user_id
