@@ -7,7 +7,8 @@ class Events::NewComment < Event
     super comment,
           user: comment.author,
           parent: comment.parent_event,
-          discussion: comment.discussion
+          discussion: comment.discussion,
+          breakout: comment.breakout
   end
 
   private

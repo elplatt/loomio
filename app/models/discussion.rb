@@ -62,7 +62,7 @@ class Discussion < ApplicationRecord
 
   has_many :discussion_readers, dependent: :destroy
 
-  has_many :breakouts
+  has_many :breakouts, dependent: :destroy
 
   scope :search_for, ->(fragment) do
      joins("INNER JOIN users ON users.id = discussions.author_id")
