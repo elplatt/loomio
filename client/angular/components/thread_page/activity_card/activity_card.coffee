@@ -4,6 +4,7 @@ RecordLoader             = require 'shared/services/record_loader'
 ChronologicalEventWindow = require 'shared/services/chronological_event_window'
 NestedEventWindow        = require 'shared/services/nested_event_window'
 ModalService             = require 'shared/services/modal_service'
+Session                  = require 'shared/services/session'
 
 { print } = require 'shared/helpers/window'
 
@@ -67,6 +68,7 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
         collection: 'events'
         params:
           discussion_id: $scope.discussion.id
+          breakout_id: Math.max(Session.user().breakoutIds)
           order: 'sequence_id'
           from: $scope.initialSequenceId(position)
           per: $scope.per

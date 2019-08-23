@@ -19,12 +19,14 @@ class API::EventsController < API::RestfulController
   end
 
   def accessible_records
+    
     records = load_and_authorize(:discussion).items.distinct.
               includes(:user, :discussion, :eventable, parent: [:user, :eventable])
 
     records = records.where("#{order} >= ?", params[:from]) if params[:from]
 
     %w(parent_id depth sequence_id position).each do |name|
+      records = records.where("breakout_id" => params["breakout_id"])
       records = records.where(name => params[name]) if params[name]
       records = records.where("#{name} >= ?", params["min_#{name}"]) if params["min_#{name}"]
       records = records.where("#{name} <= ?", params["max_#{name}"]) if params["max_#{name}"]
