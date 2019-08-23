@@ -20,6 +20,7 @@ module.exports = class EventModel extends BaseModel
     @belongsTo 'parent', from: 'events'
     @belongsTo 'actor', from: 'users'
     @belongsTo 'discussion'
+    @belongsTo 'breakout'
     @hasMany  'notifications'
 
   parentOrSelf: ->
@@ -63,7 +64,12 @@ module.exports = class EventModel extends BaseModel
     @kind == 'new_comment' && @isSurface()
 
   isForkable: ->
-    @discussion().isForking() && @kind == 'new_comment'
+    try
+      @discussion().isForking() && @kind == 'new_comment'
+    catch e
+      console.log 'caught error'
+      console.log @
+      throw e
 
   isForking: ->
     _.includes @discussion().forkedEventIds, @id

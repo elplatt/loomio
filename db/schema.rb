@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_183003) do
+ActiveRecord::Schema.define(version: 2019_08_21_204227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_183003) do
     t.integer "attachments_count", default: 0, null: false
     t.datetime "edited_at"
     t.integer "versions_count", default: 0
+    t.integer "breakout_id"
     t.index ["created_at"], name: "index_comments_on_created_at"
     t.index ["discussion_id"], name: "index_comments_on_commentable_id"
     t.index ["discussion_id"], name: "index_comments_on_discussion_id"
@@ -260,6 +261,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_183003) do
     t.integer "position", default: 0, null: false
     t.integer "child_count", default: 0, null: false
     t.integer "depth", default: 0, null: false
+    t.integer "breakout_id"
     t.index ["created_at"], name: "index_events_on_created_at"
     t.index ["discussion_id", "sequence_id"], name: "index_events_on_discussion_id_and_sequence_id", unique: true
     t.index ["discussion_id"], name: "index_events_on_discussion_id"

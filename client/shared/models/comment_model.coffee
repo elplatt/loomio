@@ -29,6 +29,7 @@ module.exports = class CommentModel extends BaseModel
     @belongsTo 'author', from: 'users'
     @belongsTo 'discussion'
     @belongsTo 'parent', from: 'comments', by: 'parentId'
+    @belongsTo 'breakout'
     @hasMany  'versions', sortBy: 'createdAt'
 
   createdEvent: ->
