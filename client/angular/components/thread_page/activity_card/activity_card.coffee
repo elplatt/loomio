@@ -16,7 +16,7 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
     $scope.debug = -> window.Loomio.debug
 
     $scope.setDefaults = ->
-      $scope.per = AppConfig.pageSize.threadItems
+      $scope.per = 0
       $scope.renderMode = 'nested'
       $scope.position = $scope.positionForSelect()
 
@@ -27,17 +27,7 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
         $scope.initialPosition()
 
     $scope.initialPosition = ->
-      switch
-        when $scope.discussion.requestedSequenceId
-          "requested"
-        when (!$scope.discussion.lastReadAt) || $scope.discussion.itemsCount == 0
-          'context'
-        when $scope.discussion.readItemsCount() == 0
-          'beginning'
-        when $scope.discussion.isUnread()
-          'unread'
-        else
-          'latest'
+      'beginning'
 
     $scope.initialSequenceId = (position) ->
       switch position
