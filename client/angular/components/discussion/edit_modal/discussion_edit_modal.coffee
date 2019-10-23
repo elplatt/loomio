@@ -5,11 +5,15 @@ Records = require 'shared/services/records'
 
 angular.module('loomioApp').factory 'DiscussionEditModal', ->
   templateUrl: 'generated/components/discussion/edit_modal/discussion_edit_modal.html'
-  controller: ['$scope', 'discussion', ($scope, discussion) ->
-    $scope.discussion = discussion.clone()
+  controller: ['$scope', 'discussion', '$mdDialog', ($scope, discussion, $mdDialog) ->
+    $scope.discussion = discussion
 
-    applySequence $scope,
-      steps: obeyMembersCanAnnounce(['save', 'announce'], $scope.discussion.group()),
-      saveComplete: (_, event) ->
-        $scope.announcement = Records.announcements.buildFromModel(event)
+    console.log discussion
+    console.log $scope.discussion
+
+    $scope.currentStep = 'save'
+    $scope.submit = () ->
+      if $scope.currentStep == 'save'
+        $scope.discussion.save().then ->
+            $mdDialog.hide()
   ]
