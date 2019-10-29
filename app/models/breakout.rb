@@ -1,6 +1,6 @@
 class Breakout < ApplicationRecord
 
-    STAGE_PRIMES = [0, 3, 5, 7, 11, 13, 17, 19, 23]
+    STAGE_PRIMES = [0, 2, 3, 5, 7, 11, 13, 17, 19, 23]
     TEAM_SIZE = 2
 
     belongs_to :discussion
@@ -36,8 +36,8 @@ class Breakout < ApplicationRecord
             if breakout.nil?
                 breakout = create(discussion:discussion, stage: stage, prime: g[:p], remainder: g[:remainder], group: g[:group])
             end
+            breakout.users << user
         end
-        breakout.users << user
         breakout
     end
 end

@@ -54,11 +54,15 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
           print()
 
     $scope.init = (position = $scope.initialPosition()) ->
+      if Session.user().breakoutIds.length > 0
+        breakout_id = Math.max(...Session.user().breakoutIds)
+      else
+        breakout_id = 0
       $scope.loader = new RecordLoader
         collection: 'events'
         params:
           discussion_id: $scope.discussion.id
-          breakout_id: Math.max(Session.user().breakoutIds)
+          breakout_id: breakout_id
           order: 'sequence_id'
           from: $scope.initialSequenceId(position)
           per: $scope.per
@@ -72,6 +76,7 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
         else
           $scope.eventWindow = new NestedEventWindow
             discussion: $scope.discussion
+            breakout_id: breakout_id
             parentEvent: $scope.discussion.createdEvent()
             initialSequenceId: $scope.initialSequenceId(position)
             per: $scope.per

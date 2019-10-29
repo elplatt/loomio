@@ -32,7 +32,7 @@ module.exports = class DiscussionModel extends BaseModel
     description: ''
     forkedEventIds: []
     numBreakouts: 0
-    numStages: 3
+    numStages: 0
     hasAll: true
     hasRandom: true
     hasLong: true

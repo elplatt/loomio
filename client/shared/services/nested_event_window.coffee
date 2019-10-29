@@ -3,7 +3,7 @@ RecordLoader    = require 'shared/services/record_loader'
 BaseEventWindow = require 'shared/services/base_event_window'
 
 module.exports = class NestedEventWindow extends BaseEventWindow
-  constructor: ({discussion, parentEvent, initialSequenceId, per}) ->
+  constructor: ({discussion, breakout_id, parentEvent, initialSequenceId, per}) ->
     super(discussion: discussion, per: per)
     @columnName = "position"
     @parentEvent = parentEvent
@@ -14,6 +14,7 @@ module.exports = class NestedEventWindow extends BaseEventWindow
       collection: 'events'
       params:
         discussion_id: @discussion.id
+        breakout_id: breakout_id
         parent_id: @parentEvent.id
         order: 'position'
         per: @per

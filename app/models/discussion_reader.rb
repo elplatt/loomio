@@ -13,7 +13,7 @@ class DiscussionReader < ApplicationRecord
 
   after_create do |discussion_reader|
     if not user.is_admin
-      Breakout.for(discussion: discussion_reader.discussion, stage: 0, user: discussion_reader.user)
+      Breakout.for(discussion: self.discussion, stage: discussion.num_stages, user: discussion_reader.user)
     end
   end
 
@@ -22,7 +22,7 @@ class DiscussionReader < ApplicationRecord
       begin
         user_discussion = find_by(user: user, discussion: discussion)
         if user_discussion.nil?
-          next_sequence = DiscussionReader.joins(:user).where(discussion_id:discussion.id, users: {is_admin:false}).length
+          next_sequence = DiscussionReader.joins(:user).where(discussion_id:discussion.id).where("users.is_admin=false").length
           user_discussion = create(user: user, discussion: discussion, sequence: next_sequence)
         end
         user_discussion

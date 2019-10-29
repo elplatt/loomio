@@ -102,6 +102,17 @@ class Discussion < ApplicationRecord
   update_counter_cache :group, :closed_discussions_count
   update_counter_cache :group, :closed_polls_count
 
+  after_update :reassign_groups
+  
+  def reassign_groups
+    stage = self.num_stages
+    for dr in discussion_readers do
+      if not dr.user.is_admin
+        Breakout.for(discussion: self, stage: num_stages, user: dr.user)
+      end
+    end
+  end
+
   def update_undecided_count
     polls.active.each(&:update_undecided_count)
   end
