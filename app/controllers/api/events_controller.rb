@@ -23,7 +23,7 @@ class API::EventsController < API::RestfulController
               includes(:user, :discussion, :eventable, parent: [:user, :eventable])
 
     records = records.where("#{order} >= ?", params[:from]) if params[:from]
-    if params['breakout_id']
+    if params['breakout_id'] and not params['breakout_id'].empty?
       breakout_ids = params['breakout_id'].split(',')
       records = records.where(breakout_id: breakout_ids)
     end
