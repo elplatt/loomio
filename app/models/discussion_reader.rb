@@ -112,6 +112,10 @@ class DiscussionReader < ApplicationRecord
     RangeSet.length(read_ranges)
   end
 
+  def polls_completed
+    User.joins(:stances).joins(:discussions).where(users: {id: user_id}, discussions: {id: discussion_id}).length
+  end
+
   private
   def membership
     @membership ||= discussion.group.membership_for(user)

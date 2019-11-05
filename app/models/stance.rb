@@ -13,6 +13,7 @@ class Stance < ApplicationRecord
   belongs_to :poll, required: true
   has_many :stance_choices, dependent: :destroy
   has_many :poll_options, through: :stance_choices
+  has_one :discussion, through: :poll
 
   has_paper_trail only: [:reason]
   define_counter_cache(:versions_count)  { |stance| stance.versions.count }

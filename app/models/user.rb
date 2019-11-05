@@ -361,12 +361,25 @@ class User < ApplicationRecord
     I18n.with_locale(locale) { devise_mailer.send(notification, self, *args).deliver_now }
   end
 
+  def discussion_stages
+    stances = Stance.joins("inner join polls on stances.poll_id=polls.id").select(['stances.*', 'polls.*']).where(participant_id:self.id)
+    counts = {}
+    for stance in stances
+      if counts.key?(stance.poll.discussion_id)
+        counts[stance.poll.discussion_id] += 1
+      else
+        counts[stance.poll.discussion_id] = 1
+      end
+    end
+    counts
+  end
+
   protected
 
   def password_required?
     !password.nil? || !password_confirmation.nil?
   end
-
+  
   private
 
   def validate_recaptcha
