@@ -237,6 +237,40 @@ class Poll < ApplicationRecord
     self.custom_fields.fetch('minimum_stance_choices', 1).to_i
   end
 
+  def copy_options
+    new_options = []
+    for option in self.poll_options do
+      copy = option.dup
+      copy.score_counts = {}
+      copy.poll_id = nil
+      new_options << copy
+    end
+    new_options
+  end
+
+  def deep_copy
+    # Count number of polls in this discussion, used for labeling
+    poll_count = self.discussion.polls.length
+    title = self.title[0...self.title.rindex(' ')] << ' Poll #{poll_count + 1}'
+    # We need to use create to generate a ReadableUnguessableURL in the key attribute
+    new_poll = Poll.create(
+      title: title,
+      author: self.author,
+      discussion: self.discussion,
+      poll_type: self.poll_type,
+      custom_fields: self.custom_fields,
+      poll_options: self.copy_options
+    )
+    
+    # ADD
+    # undecided_count ?
+    # stances_count ?
+    # stance_counts ?
+    # undecided_count ?
+    
+    new_poll
+  end
+
   private
 
   # provides a base hash of 0's to merge with stance data
@@ -296,4 +330,5 @@ class Poll < ApplicationRecord
       errors.add(field, I18n.t(:"activerecord.errors.messages.blank")) if custom_fields[field].nil?
     end
   end
+  
 end
