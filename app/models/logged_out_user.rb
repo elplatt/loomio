@@ -47,4 +47,8 @@ class LoggedOutUser
   def avatar_kind
     'initials'
   end
+  
+  def discussion_stages
+    []
+  end
 end

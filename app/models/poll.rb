@@ -251,14 +251,14 @@ class Poll < ApplicationRecord
   def deep_copy
     # Count number of polls in this discussion, used for labeling
     poll_count = self.discussion.polls.length
-    title = self.title[0...self.title.rindex(' ')] << ' Poll #{poll_count + 1}'
+    title = self.title[0...self.title.rindex(' ')] << " Poll #{poll_count + 1}"
     # We need to use create to generate a ReadableUnguessableURL in the key attribute
-    new_poll = Poll.create(
+    new_poll = Poll.new(
       title: title,
       author: self.author,
-      discussion: self.discussion,
+      discussion: nil,
       poll_type: self.poll_type,
-      custom_fields: self.custom_fields,
+      custom_fields: self.custom_fields.dup,
       poll_options: self.copy_options
     )
     

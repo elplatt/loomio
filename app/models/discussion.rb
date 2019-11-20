@@ -102,14 +102,27 @@ class Discussion < ApplicationRecord
   update_counter_cache :group, :closed_discussions_count
   update_counter_cache :group, :closed_polls_count
 
-  after_update :reassign_groups
+  after_commit :update_stage
   
-  def reassign_groups
+  def update_stage
+    # Update breakouts
     stage = self.num_stages
     for dr in discussion_readers do
       if not dr.user.is_admin
+        # Will use existing breakout if one exists for this stage
+        # Otherwise, will create a new one
         Breakout.for(discussion: self, stage: num_stages, user: dr.user)
       end
+    end
+    
+    # Update poll
+    # Only update if one already exists (ignore discussion creation)
+    # There is 1 poll at stage 0, and one is added each time the stage increments
+    poll_count = self.polls.length
+    if poll_count > 0 and poll_count - 1 < stage
+      next_stage_poll = self.polls.last.deep_copy
+      self.polls << next_stage_poll
+      next_stage_poll.save
     end
   end
 

@@ -22,7 +22,7 @@ angular.module('loomioApp').factory 'DiscussionStartModal', ->
       if $scope.currentStep == 'save'
         $scope.discussion.save().then ->
             $scope.poll = Records.polls.build
-              title:        $scope.discussion.title
+              title:        $scope.discussion.title + ' - Stage 1'
               pollType:     'ranked_choice'
               discussionId: $scope.discussion.id
               groupId:      discussion.group.id
