@@ -57,6 +57,8 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
       console.log(Session.user())
       console.log($scope.discussion)
       discussionStage = Session.user().discussionStages[$scope.discussion.id]
+      if typeof(discussionStage) == 'undefined'
+        discussionStage = 0
       if discussionStage < $scope.discussion.numStages + 1
         $scope.waitingForPoll = true
       else

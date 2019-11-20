@@ -362,8 +362,10 @@ class User < ApplicationRecord
   end
 
   def discussion_stages
+    discussions = DiscussionReader.where(user_id: self.id).pluck(:discussion_id)
     stances = Stance.joins("inner join polls on stances.poll_id=polls.id").select(['stances.*', 'polls.*']).where(participant_id:self.id)
     counts = {}
+    discussions.each { |discussion_id| counts[discussion_id] = 0 }
     for stance in stances
       if counts.key?(stance.poll.discussion_id)
         counts[stance.poll.discussion_id] += 1
