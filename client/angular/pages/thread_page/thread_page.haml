@@ -5,7 +5,6 @@
     %group_theme{group: "threadPage.discussion.group()", compact: "true"}
     .thread-page__main-content{ng-class: "{'thread-page__forking': threadPage.discussion.isForking()}"}
       %outlet.before-column-right.lmo-column-right{name: "before-thread-page-column-right", model: "threadPage.discussion"}
-      %poll_common_card.lmo-card--no-padding.lmo-column-right{poll: "poll", ng-repeat: "poll in threadPage.discussion.activePolls() track by poll.id"}
       %decision_tools_card.decision-tools-card.lmo-column-right{discussion: "threadPage.discussion", ng-if: "isSiteAdmin"}
       %membership_card.lmo-column-right{group: "threadPage.discussion.guestGroup()", ng-if: "isSiteAdmin"}
       %membership_card.lmo-column-right{group: "threadPage.discussion.guestGroup()", pending: "true", ng-if: "isSiteAdmin"}
