@@ -108,7 +108,7 @@ ng_outlet {
 }
 
 @media (min-width: $small-max-px){
-  /* applied to medium and large screens: pages have two columns; */
+  /* boop applied to medium and large screens: pages have two columns; */
 
   .lmo-group-column-left{
     width: percentage(2/3);
@@ -131,4 +131,10 @@ ng_outlet {
     float: left;
     clear: left;
   }
+}
+
+.elp-topright {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
