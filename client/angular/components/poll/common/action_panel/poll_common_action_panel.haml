@@ -7,5 +7,5 @@
       .poll-common-unable-to-vote{ng-if: "!userCanParticipate()"}
         %p.lmo-hint-text{translate: "poll_common_action_panel.unable_to_vote"}
         .lmo-md-actions
-          %show_results_button
+          %show_results_button{ng-if: "isSiteAdmin"}
           %div

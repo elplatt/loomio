@@ -9,9 +9,9 @@
       %h1.lmo-h1{ng-if: "discussion.translation"}
         %translation{model: "discussion", field: "title"}
 
-    %context_panel_dropdown{discussion: "discussion"}
+    %context_panel_dropdown{discussion: "discussion", ng-if: "isAdminUser"}
 
-  .context-panel__details.md-body-1.lmo-flex--row
+  .context-panel__details.md-body-1.lmo-flex--row{ng-if: "isAdminUser"}
     %user_avatar.lmo-margin-right{user: "discussion.author()", size: "small"}
     %span
       %strong> {{::discussion.authorName()}}
@@ -44,6 +44,6 @@
 
   %document_list{model: "discussion", skip-fetch: "true"}
 
-  .lmo-md-actions
+  .lmo-md-actions{ng-if: "isAdminUser"}
     %reactions_display.context-panel__actions-left{model: "discussion", load: "true"}
     %action_dock{model: "discussion", actions: "actions"}

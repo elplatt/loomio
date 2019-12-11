@@ -10,4 +10,6 @@
       %membership_card.lmo-column-right{group: "threadPage.discussion.guestGroup()", pending: "true", ng-if: "isSiteAdmin"}
       %poll_common_index_card.lmo-column-right{model: "threadPage.discussion", ng-if: "isSiteAdmin"}
       %outlet.after-column-right.lmo-column-right{name: "thread-page-column-right"}
-      %thread_card.lmo-column-left{discussion: "threadPage.discussion"}
+      %thread_card.lmo-column-left{discussion: "threadPage.discussion", ng-if: "isSiteAdmin"}
+      %thread_card.lmo-column-left.elp-center-col{discussion: "threadPage.discussion", ng-if: "!isSiteAdmin"}
+      
