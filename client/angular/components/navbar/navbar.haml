@@ -11,8 +11,8 @@
 
       .navbar__right
         .lmo-flex--row{ng-if: "isLoggedIn()"}
-          %navbar_search
-          %notifications
-          %user_dropdown
+          %navbar_search{ng-if: "isSiteAdmin()"}
+          %notifications{ng-if: "isSiteAdmin()"}
+          %user_dropdown{ng-if: "isSiteAdmin()"}
         %md-button.md-primary.md-raised.navbar__sign-in{ng-if: "!isLoggedIn()", ng-click: "signIn()"}>
           %span{translate: "navbar.sign_in"}

@@ -17,6 +17,9 @@ angular.module('loomioApp').directive 'contextPanel', ['$rootScope', 'clipboard'
   replace: true
   templateUrl: 'generated/components/thread_page/context_panel/context_panel.html'
   controller: ['$scope', ($scope) ->
+    
+    $scope.isSiteAdmin = AbilityService.isSiteAdmin()
+  
     $scope.status = ->
       return 'pinned' if $scope.discussion.pinned
 

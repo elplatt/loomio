@@ -5,10 +5,10 @@
         %i.mdi.mdi-camera.mdi-24px
         %span.group-theme__upload-help-text{translate: "group_page.new_photo"}
   .group-theme__header--compact{ng-if: "compact"}
-    .group-theme__logo--compact{aria-hidden: "true"}
+    .group-theme__logo--compact{aria-hidden: "true", ng-if: "user.isSiteAdmin()"}
       %a{lmo-href-for: "group"}
         %img{ng-src: "{{group.logoUrl()}}", alt: "{{ 'group_page.group_logo' | translate }}"}
-    .group-theme__name--compact{aria-label: "breadcrumb", role: "navigation"}
+    .group-theme__name--compact{aria-label: "breadcrumb", role: "navigation", ng-if: "user.isSiteAdmin()"}
       %a{ng-if: "group.isSubgroup()", lmo-href-for: "group.parent()"}>
         {{group.parentName()}}
       %span{ng-if: "group.isSubgroup()"}> \-

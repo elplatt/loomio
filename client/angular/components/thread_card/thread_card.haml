@@ -1,4 +1,4 @@
 .thread-card.lmo-card--no-padding
   %context_panel{discussion: "discussion"}
-  %poll_common_card.lmo-card--no-padding{poll: "poll", ng-repeat: "poll in discussion.activePolls() track by poll.id"}
+  %poll_common_card.lmo-card--no-padding{ng-if: "waitingForPoll", poll: "poll", ng-repeat: "poll in discussion.activePolls() track by poll.id"}
   %activity_card{discussion: "discussion", ng-if: "discussion.createdEvent()"}

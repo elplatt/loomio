@@ -9,9 +9,9 @@
       %h1.lmo-h1{ng-if: "discussion.translation"}
         %translation{model: "discussion", field: "title"}
 
-    %context_panel_dropdown{discussion: "discussion", ng-if: "isAdminUser"}
+    %context_panel_dropdown{discussion: "discussion", ng-if: "isSiteAdmin"}
 
-  .context-panel__details.md-body-1.lmo-flex--row{ng-if: "isAdminUser"}
+  .context-panel__details.md-body-1.lmo-flex--row{ng-if: "isSiteAdmin"}
     %user_avatar.lmo-margin-right{user: "discussion.author()", size: "small"}
     %span
       %strong> {{::discussion.authorName()}}
