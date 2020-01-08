@@ -17,6 +17,10 @@ class Discussion < ApplicationRecord
   include HasCreatedEvent
   extend  NoSpam
 
+  SingleGroup = 1
+  RandomNet = 2
+  LongPathNet = 3
+
   no_spam_for :title, :description
 
   scope :archived, -> { where('archived_at is not null') }
@@ -124,6 +128,28 @@ class Discussion < ApplicationRecord
       self.polls << next_stage_poll
       next_stage_poll.save
     end
+  end
+
+  def treatment_counts
+    counts = {}
+    if self.has_all
+      counts[SingleGroup] = DiscussionReader.where(discussion: self, treatment:SingleGroup).length
+    end
+    if self.has_random
+      counts[RandomNet] = DiscussionReader.where(discussion: self, treatment:RandomNet).length
+    end
+    if self.has_long
+      counts[LongPathNet] = DiscussionReader.where(discussion: self, treatment:LongPathNet).length
+    end
+    counts
+  end
+  
+  def treatment_assignment
+    counts = treatment_counts
+    lowest = counts.values.sort_by { |key, value| value }.first
+    assignable = counts.select { |key, value| value == lowest }
+    assignable
+    # TODO
   end
 
   def update_undecided_count
