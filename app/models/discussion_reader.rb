@@ -22,8 +22,9 @@ class DiscussionReader < ApplicationRecord
       begin
         user_discussion = find_by(user: user, discussion: discussion)
         if user_discussion.nil?
-          next_sequence = DiscussionReader.joins(:user).where(discussion_id:discussion.id).where("users.is_admin=false").length
-          user_discussion = create(user: user, discussion: discussion, sequence: next_sequence)
+          next_treatment = discussion.treatment_assignment
+          next_sequence = DiscussionReader.joins(:user).where(discussion_id:discussion.id, treatment:next_treatment).where("users.is_admin=false").length
+          user_discussion = create(user: user, discussion: discussion, sequence: next_sequence, treatment:next_treatment)
         end
         user_discussion
       rescue ActiveRecord::RecordNotUnique

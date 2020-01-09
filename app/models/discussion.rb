@@ -148,8 +148,7 @@ class Discussion < ApplicationRecord
     counts = treatment_counts
     lowest = counts.values.sort_by { |key, value| value }.first
     assignable = counts.select { |key, value| value == lowest }
-    assignable
-    # TODO
+    assignable.keys.sample
   end
 
   def update_undecided_count
