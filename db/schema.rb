@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_204227) do
+ActiveRecord::Schema.define(version: 2020_01_16_182552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_204227) do
     t.integer "remainder"
     t.integer "group"
     t.bigint "discussion_id"
+    t.integer "treatment"
     t.index ["discussion_id"], name: "index_breakouts_on_discussion_id"
   end
 
