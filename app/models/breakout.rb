@@ -27,20 +27,20 @@ class Breakout < ApplicationRecord
     def self.random_for(discussion:, sequence:, stage:)
         if stage == 0
             # First stage, just fill up groups as users arrive
-            group = (sequence / team_size).floor
+            group = (sequence / TEAM_SIZE).floor
         else
             high_group = discussion.breakouts.where(stage: 0).length - 1
             groups = *(0..high_group)
             groups = groups do |g|
-                b = Breakout.find_by(discussion:discussion, treatment:Discussion.RandomNet, group: g)
+                b = Breakout.find_by(discussion:discussion, treatment:Discussion::RandomNet, group: g)
                 b.nil? or b.users.length < TEAM_SIZE
             end
             group = groups.sample
         end
-        breakout = find_by(discussion:discussion, treatment:Discussion.RandomNet, group: group)
+        breakout = find_by(discussion:discussion, treatment:Discussion::RandomNet, group: group)
         if breakout.nil?
             # If no breakout exists for this group, create it
-            breakout = create(discussion:discussion, treatment:Discussion.RandomNet, group: group)
+            breakout = create(discussion:discussion, treatment:Discussion::RandomNet, group: group)
         end
         breakout
     end
@@ -50,24 +50,24 @@ class Breakout < ApplicationRecord
         breakout = user.breakouts.find_by(discussion: discussion, stage: stage)
         if breakout.nil?
             
-            dr = DiscussionReader.find(discussion: discussion.id, user_id: user.id)
+            dr = DiscussionReader.find_by(discussion: discussion.id, user_id: user.id)
             treatment = dr.treatment
-            
-            if treatment == Discussion.LongPathNet
+            sequence = discussion.discussion_readers.find_by(user: user).sequence
+
+            if treatment == Discussion::LongPathNet
             
                 # Breakout not assigned yet, get group and remainder for current user/discussion/stage
-                sequence = discussion.discussion_readers.find_by(user: user).sequence
                 g = group_for(stage: stage, sequence: sequence, team_size: TEAM_SIZE)
-                breakout = find_by(discussion:discussion, treatment:Discussion.LongPathNet, stage: stage, remainder: g[:remainder], group: g[:group])
+                breakout = find_by(discussion:discussion, treatment:Discussion::LongPathNet, stage: stage, remainder: g[:remainder], group: g[:group])
                 # If the breakout does not exist, create it
                 if breakout.nil?
                     breakout = create(discussion:discussion, stage: stage, prime: g[:p], remainder: g[:remainder], group: g[:group], treatment:treatment)
                 end
             end
-            if treatment == Discussion.RandomNet
-                breakout = random_for(discussion:discussion, stage: stage)
+            if treatment == Discussion::RandomNet
+                breakout = random_for(discussion:discussion, sequence: sequence, stage: stage)
             end
-            if treatment == Discussion.SingleGroup
+            if treatment == Discussion::SingleGroup
                 #TODO
             end
             breakout.users << user
