@@ -6,7 +6,7 @@ angular.module('loomioApp').directive 'threadCard', ->
   templateUrl: 'generated/components/thread_card/thread_card.html'
   controller: ['$scope', ($scope) ->
       discussionStage = Session.user().discussionStages[$scope.discussion.id]
-      if typeof(discussionStage) == 'undefined'
+      if typeof(Session.user().disccussionStages) == 'undefined' || typeof(discussionStage) == 'undefined'
         discussionStage = 0
       if discussionStage < $scope.discussion.numStages + 1
         $scope.waitingForPoll = true
