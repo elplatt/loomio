@@ -37,10 +37,10 @@ class Breakout < ApplicationRecord
             end
             group = groups.sample
         end
-        breakout = find_by(discussion:discussion, treatment:Discussion::RandomNet, group: group)
+        breakout = find_by(discussion:discussion, treatment:Discussion::RandomNet, group: group, stage: stage)
         if breakout.nil?
             # If no breakout exists for this group, create it
-            breakout = create(discussion:discussion, treatment:Discussion::RandomNet, group: group)
+            breakout = create(discussion:discussion, treatment:Discussion::RandomNet, group: group, stage: stage)
         end
         breakout
     end
