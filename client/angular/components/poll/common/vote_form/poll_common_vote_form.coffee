@@ -10,12 +10,14 @@ angular.module('loomioApp').directive 'pollCommonVoteForm', ->
   controller: ['$scope', '$element', ($scope, $element) ->
     $scope.selectedOptionId = $scope.stance.pollOptionId()
 
-    $scope.submit = submitStance $scope, $scope.stance,
-      prepareFn: ->
-        $scope.stance.id = null
-        $scope.stance.stanceChoicesAttributes = [
-          poll_option_id: $scope.selectedOptionId
-        ]
+    $scope.submit = () ->
+      submitStance $scope, $scope.stance,
+        prepareFn: ->
+          $scope.stance.id = null
+          $scope.stance.stanceChoicesAttributes = [
+            poll_option_id: $scope.selectedOptionId
+          ]
+      alert('submitted')
 
     $scope.isSelected = (option) ->
       $scope.selectedOptionId == option.id

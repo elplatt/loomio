@@ -46,6 +46,7 @@ module.exports =
         scrollTo '.poll-common-card__results-shown'
         EventBus.emit scope, 'stanceSaved'
         signIn(data, data.stances[0].participant_id, -> EventBus.emit scope, 'loggedIn') unless Session.user().emailVerified
+        location.reload()
       cleanupFn: ->
         EventBus.emit scope, 'doneProcessing'
     , options))
