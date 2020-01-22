@@ -44,6 +44,6 @@
 
   %document_list{model: "discussion", skip-fetch: "true"}
 
-  .lmo-md-actions{ng-if: "isAdminUser"}
+  .lmo-md-actions{ng-if: "isSiteAdmin"}
     %reactions_display.context-panel__actions-left{model: "discussion", load: "true"}
     %action_dock{model: "discussion", actions: "actions"}
