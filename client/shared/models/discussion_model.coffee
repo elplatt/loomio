@@ -70,7 +70,10 @@ module.exports = class DiscussionModel extends BaseModel
     groupName: @groupName()
 
   authorName: ->
-    @author().nameWithTitle(@)
+    if not @author()?
+        ''
+    else
+        @author().nameWithTitle(@)
 
   groupName: ->
     @group().name if @group()

@@ -30,9 +30,10 @@ class Breakout < ApplicationRecord
             group = (sequence / TEAM_SIZE).floor
         else
             high_group = discussion.breakouts.where(stage: 0).length - 1
-            groups = *(0..high_group)
-            groups = groups do |g|
-                b = Breakout.find_by(discussion:discussion, treatment:Discussion::RandomNet, group: g)
+            groups = (0..high_group).select do |g|
+                # For each group, find current stage breakout
+                b = Breakout.find_by(discussion:discussion, treatment:Discussion::RandomNet, stage: stage, group: g)
+                # Return true if group is nonexistant or not yet full
                 b.nil? or b.users.length < TEAM_SIZE
             end
             group = groups.sample
