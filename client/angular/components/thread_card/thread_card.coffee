@@ -12,6 +12,8 @@ angular.module('loomioApp').directive 'threadCard', ->
         discussionStage = 0
       if discussionStage < $scope.discussion.numStages + 1
         $scope.waitingForPoll = true
+        polls = $scope.discussion.activePolls()
+        $scope.poll = _.sortBy(polls, 'title')[discussionStage]
       else
         $scope.waitingForPoll = false
   ]
