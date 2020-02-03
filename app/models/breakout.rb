@@ -46,6 +46,14 @@ class Breakout < ApplicationRecord
         breakout
     end
 
+    def self.single_for(discussion:, stage:)
+        breakout = find_by(discussion: discussion, stage: stage)
+        if breakout.nil?
+            breakout = create(discussion: discussion, treatment:Discussion::SingleGroup, stage:stage)
+        end
+        breakout
+    end
+
     def self.for(discussion:, stage:, user:)
         # See if breakout already exists for user/discussion/stage
         breakout = user.breakouts.find_by(discussion: discussion, stage: stage)
@@ -69,7 +77,7 @@ class Breakout < ApplicationRecord
                 breakout = random_for(discussion:discussion, sequence: sequence, stage: stage)
             end
             if treatment == Discussion::SingleGroup
-                #TODO
+                breakout = single_for(discussion:discussion, stage: stage)
             end
             breakout.users << user
         end
