@@ -376,6 +376,18 @@ class User < ApplicationRecord
     counts
   end
 
+  def discussion_breakouts
+    discussions = DiscussionReader.where(user_id: self.id).map do |dr|
+      dr.discussion
+    end
+    lists = {}
+    discussions.each { |d| lists[d.id] = [] }
+    self.breakouts.each do |b|
+      lists[b.discussion.discussion_id] << b.id
+    end
+    lists
+  end
+
   protected
 
   def password_required?
