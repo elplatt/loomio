@@ -22,7 +22,8 @@ class PermittedParams < Struct.new(:params)
      :time_zone, :selected_locale, :email_when_mentioned, :default_membership_volume,
      :email_catch_up, :deactivation_response, :has_password, :has_token, :email_status,
      :email_when_proposal_closing_soon, :email_new_discussions_and_proposals, :email_on_participation, :email_newsletter,
-     :legal_accepted, :discussion_stages, {email_new_discussions_and_proposals_group_ids: []}]
+     :legal_accepted, :discussion_stages, :discussion_breakouts,
+     {email_new_discussions_and_proposals_group_ids: []}]
   end
 
   def poll_attributes

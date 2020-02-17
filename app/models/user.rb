@@ -154,7 +154,7 @@ class User < ApplicationRecord
   scope :visible_by, -> (user) { distinct.active.verified.joins(:memberships).where("memberships.group_id": user.group_ids).where.not(id: user.id) }
   scope :mention_search, -> (user, model, query) do
     # allow mentioning of anyone in the organisation
-    group_ids = (model.group.parent_or_self.id_and_subgroup_ids + [model.guest_group.id]).compact.uniq
+    group_ids = (model.group.parent_or_self.id_and_subgroup_ids).compact.uniq
     distinct.active.verified.
       search_for(query).
       joins(:memberships).
@@ -377,9 +377,6 @@ class User < ApplicationRecord
   end
 
   def discussion_breakouts
-    discussions = DiscussionReader.where(user_id: self.id).map do |dr|
-      dr.discussion
-    end
     lists = {}
     discussions.each { |d| lists[d.id] = [] }
     self.breakouts.each do |b|

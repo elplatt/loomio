@@ -72,7 +72,7 @@ module Ability::Discussion
     end
 
     can :start_poll, ::Discussion do |discussion|
-      can?(:start_poll, discussion.group) || can?(:start_poll, discussion.guest_group)
+      can?(:start_poll, discussion.group)
     end
   end
 end

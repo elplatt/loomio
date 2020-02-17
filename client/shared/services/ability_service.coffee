@@ -42,6 +42,10 @@ module.exports = new class AbilityService
       when 'group'      then (@canAdministerGroup(model) or Session.user().isMemberOf(model) and model.membersCanRaiseMotions)
 
   canParticipateInPoll: (poll) ->
+    console.log('canParticipateInPoll()')
+    console.log poll
+    console.log(@memberOf(poll))
+    console.log(poll.groups())
     return false unless poll
     return false unless poll.isActive()
     poll.anyoneCanParticipate or

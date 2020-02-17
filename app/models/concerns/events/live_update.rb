@@ -6,6 +6,7 @@ module Events::LiveUpdate
 
   # send client live updates
   def notify_clients!
+    puts eventable
     eventable.groups.each do |group|
       MessageChannelService.publish_data(event_collection, to: group.message_channel)
     end
