@@ -50,7 +50,7 @@ class DiscussionEmailInfo
   private
 
   def membership
-    @membership ||= discussion.guest_group.memberships.find_by(user: recipient)
+    @membership
   end
 
   def utm_hash(args = {})

@@ -2,7 +2,6 @@ class MembershipsController < ApplicationController
   include PrettyUrlHelper
 
   def join
-    session[:pending_group_token] = join_target.guest_group.token
     redirect_to back_to_url || polymorphic_url(join_target)
   end
 

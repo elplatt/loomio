@@ -3,7 +3,7 @@ module Ability::Poll
     super(user)
 
     can :view_pending_invitations, ::Poll do |poll|
-      can? :view_pending_invitations, poll.guest_group
+      true
     end
 
     can :make_draft, ::Poll do |poll|
@@ -17,18 +17,15 @@ module Ability::Poll
 
     can :vote_in, ::Poll do |poll|
       poll.active? && (
-        poll.anyone_can_participate ||
         (poll.group.members_can_vote && user_is_member_of_any?(poll.groups)) ||
         user_is_admin_of_any?(poll.groups)
       )
     end
 
     can [:show, :toggle_subscription, :subscribe_to], ::Poll do |poll|
-      poll.anyone_can_participate ||
       user_is_author_of?(poll) ||
       can?(:show, poll.discussion) ||
-      poll.members.include?(user) ||
-      poll.guest_group.memberships.pluck(:token).include?(user.membership_token)
+      poll.members.include?(user)
     end
 
     can :create, ::Poll do |poll|
