@@ -15,13 +15,17 @@ module.exports = class UserRecordsInterface extends BaseRecordsInterface
         "#{model.constructor.singular}_id": model.id
 
   updateProfile: (user) =>
-    @remote.post 'update_profile', _.merge(user.serialize(), {unsubscribe_token: user.unsubscribeToken })
+    serialized = user.serialize()
+    delete serialized['user']['discussion_stages']
+    @remote.post 'update_profile', _.merge(serialized, {unsubscribe_token: user.unsubscribeToken })
 
   uploadAvatar: (file) =>
     @remote.upload 'upload_avatar', file
 
   changePassword: (user) =>
-    @remote.post 'change_password', user.serialize()
+    serialized = user.serialize()
+    delete serialized['user']['discussion_stages']
+    @remote.post 'change_password', serialized
 
   deactivate: (user) =>
     @remote.post 'deactivate', user.serialize()

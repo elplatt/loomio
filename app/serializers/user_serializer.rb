@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   attributes :id, :name, :username, :short_bio, :avatar_initials, :avatar_kind,
              :avatar_url, :email_hash, :time_zone, :locale, :location, :created_at,
-             :email_verified, :has_password, :last_seen_at, :email, :discussion_stages
+             :email_verified, :has_password, :last_seen_at, :email, :discussion_stages, :discussion_breakouts
 
   has_many :breakouts, serializer: BreakoutSerializer, root: :breakouts
 
