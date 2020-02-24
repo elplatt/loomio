@@ -12,8 +12,6 @@ LmoUrlService     = require 'shared/services/lmo_url_service'
 $controller = ($scope, $routeParams, $rootScope) ->
   EventBus.broadcast $rootScope, 'currentComponent', { page: 'threadPage', skipScroll: true }
 
-  console.log(Session.user())
-
   $scope.isSiteAdmin = AbilityService.isSiteAdmin()
 
   requestedCommentId = ->

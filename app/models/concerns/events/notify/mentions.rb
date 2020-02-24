@@ -6,7 +6,11 @@ module Events::Notify::Mentions
 
   # send event notifications
   def notify_mentions!
-    return
+    return unless eventable.newly_mentioned_users.any?
+    inviter = GroupInviter.new(group: eventable.guest_group,
+                               inviter: user,
+                               user_ids: eventable.newly_mentioned_users.pluck(:id)).invite!
+    Events::UserMentioned.publish! eventable, user, eventable.newly_mentioned_users
   end
   handle_asynchronously :notify_mentions!
 

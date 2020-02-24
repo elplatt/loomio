@@ -45,7 +45,7 @@ class Membership < ApplicationRecord
   scope :undecided_for, ->(poll) {
      joins(:user)
     .joins("LEFT OUTER JOIN stances ON stances.participant_id = users.id AND stances.poll_id = #{poll.id}")
-    .where(group: [poll.group])
+    .where(group: [poll.group, poll.discussion_guest_group, poll.guest_group])
     .where('stances.id': nil).accepted
   }
 

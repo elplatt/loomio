@@ -5,6 +5,7 @@ class Poll < ApplicationRecord
   include HasEvents
   include HasMentions
   include HasDrafts
+  include HasGuestGroup
   include MessageChannel
   include SelfReferencing
   include UsesOrganisationScope
@@ -45,7 +46,6 @@ class Poll < ApplicationRecord
   has_many :stances, dependent: :destroy
   has_many :stance_choices, through: :stances
   has_many :participants, through: :stances, source: :participant
-  has_many :members, through: :group
 
   has_many :poll_unsubscriptions, dependent: :destroy
   has_many :unsubscribers, through: :poll_unsubscriptions, source: :user
@@ -110,9 +110,10 @@ class Poll < ApplicationRecord
   define_counter_cache(:versions_count) { |poll| poll.versions.count}
 
   delegate :locale, to: :author
+  delegate :guest_group, to: :discussion, prefix: true, allow_nil: true
 
   def groups
-    [group].compact
+    [group, discussion&.guest_group, guest_group].compact
   end
 
   def undecided
@@ -255,7 +256,6 @@ class Poll < ApplicationRecord
     new_poll = Poll.new(
       title: title,
       author: self.author,
-      group: self.group,
       discussion: nil,
       poll_type: self.poll_type,
       custom_fields: self.custom_fields.dup,
@@ -329,10 +329,6 @@ class Poll < ApplicationRecord
     Array(required_custom_fields).each do |field|
       errors.add(field, I18n.t(:"activerecord.errors.messages.blank")) if custom_fields[field].nil?
     end
-  end
-  
-  def anyone_can_participate
-    false
   end
   
 end

@@ -7,10 +7,6 @@ class LoggedOutUser
     []
   end
 
-  def discussion_breakouts
-    {}
-  end
-
   alias :read_attribute_for_serialization :send
 
   def initialize(name: nil, email: nil, token: nil, membership_token: nil, locale: I18n.locale)

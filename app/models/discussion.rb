@@ -7,6 +7,7 @@ class Discussion < ApplicationRecord
   include HasTimeframe
   include HasEvents
   include HasMentions
+  include HasGuestGroup
   include HasDrafts
   include HasImportance
   include MessageChannel
@@ -60,7 +61,6 @@ class Discussion < ApplicationRecord
   has_many :documents, as: :model, dependent: :destroy
   has_many :poll_documents,    through: :polls,    source: :documents
   has_many :comment_documents, through: :comments, source: :documents
-  has_many :members, through: :group
 
   has_many :items, -> { includes(:user).thread_events }, class_name: 'Event', dependent: :destroy
 
@@ -107,10 +107,6 @@ class Discussion < ApplicationRecord
   update_counter_cache :group, :closed_polls_count
 
   after_commit :update_stage
-  
-  def groups
-    [group]
-  end
   
   def update_stage
     # Update breakouts

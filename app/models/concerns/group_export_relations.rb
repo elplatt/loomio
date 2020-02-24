@@ -32,6 +32,10 @@ module GroupExportRelations
     # readers
     has_many :discussion_readers,  through: :discussions
 
+    # guest groups
+    has_many :discussion_guest_groups,      through: :discussions,        source: :guest_group
+    has_many :exportable_poll_guest_groups, through: :exportable_polls,   source: :guest_group
+
     # users
     has_many :discussion_authors,         through: :discussions,                    source: :author
     # has_many :discussion_reader_users, through: :discussion_readers, source: :user
@@ -54,7 +58,9 @@ module GroupExportRelations
   def all_groups
     Queries::UnionQuery.for(:groups, [
       Group.where(id: self.id),
-      self.subgroups
+      self.subgroups,
+      self.discussion_guest_groups,
+      self.exportable_poll_guest_groups
     ])
   end
 

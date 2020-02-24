@@ -84,7 +84,7 @@ class PollEmailInfo
   private
 
   def membership
-    @membership
+    @membership ||= poll.guest_group.memberships.find_by(user: recipient)
   end
 
 end
