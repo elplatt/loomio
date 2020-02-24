@@ -378,7 +378,7 @@ class User < ApplicationRecord
 
   def discussion_breakouts
     lists = {}
-    discussions.each { |d| lists[d.id] = [] }
+    discussions.compact.each { |d| lists[d.id] = [] }
     self.breakouts.each do |b|
       lists[b.discussion.discussion_id] << b.id
     end
