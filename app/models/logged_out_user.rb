@@ -51,4 +51,8 @@ class LoggedOutUser
   def discussion_stages
     []
   end
+  
+  def discussion_breakouts
+    {}
+  end
 end
