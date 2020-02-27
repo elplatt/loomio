@@ -146,7 +146,7 @@ class Discussion < ApplicationRecord
   
   def treatment_assignment
     counts = treatment_counts
-    lowest = counts.values.sort_by { |key, value| value }.first
+    lowest = counts.values.sort_by { |value| value }.first
     assignable = counts.select { |key, value| value == lowest }
     assignable.keys.sample
   end
