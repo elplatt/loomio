@@ -33,10 +33,11 @@ angular.module('loomioApp').directive 'commentForm', ->
       $scope.comment.parentId = parentComment.id
 
     $scope.init = ->
+      breakoutIds = Session.user().discussionBreakouts[$scope.discussion.id]
       $scope.comment = Records.comments.build
         discussionId: $scope.discussion.id
         authorId: Session.user().id
-        breakoutId: Math.max(...Session.user().breakoutIds)
+        breakoutId: Math.max(breakoutIds)
 
       $scope.submit = submitForm $scope, $scope.comment,
         submitFn: $scope.comment.save
