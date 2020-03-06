@@ -133,13 +133,25 @@ class Discussion < ApplicationRecord
   def treatment_counts
     counts = {}
     if self.has_all
-      counts[SingleGroup] = DiscussionReader.where(discussion: self, treatment:SingleGroup).length
+      readers = DiscussionReader.where(discussion: self, treatment:SingleGroup)
+      readers = readers.select do |r|
+        not r.user.is_admin
+      end
+      counts[SingleGroup] = readers.count
     end
     if self.has_random
-      counts[RandomNet] = DiscussionReader.where(discussion: self, treatment:RandomNet).length
+      readers = DiscussionReader.where(discussion: self, treatment:RandomNet)
+      readers = readers.select do |r|
+        not r.user.is_admin
+      end
+      counts[RandomNet] = readers.length
     end
     if self.has_long
-      counts[LongPathNet] = DiscussionReader.where(discussion: self, treatment:LongPathNet).length
+      readers = DiscussionReader.where(discussion: self, treatment:LongPathNet)
+      readers = readers.select do |r|
+        not r.user.is_admin
+      end
+      counts[LongPathNet] = readers.length
     end
     counts
   end
