@@ -38,7 +38,7 @@ angular.module('loomioApp').directive 'commentForm', ->
         discussionId: $scope.discussion.id
         authorId: Session.user().id
         breakoutId: Math.max(breakoutIds)
-
+  
       $scope.submit = submitForm $scope, $scope.comment,
         submitFn: $scope.comment.save
         flashSuccess: ->

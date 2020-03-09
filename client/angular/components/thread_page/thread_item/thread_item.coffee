@@ -19,6 +19,7 @@ angular.module('loomioApp').directive 'threadItem', ['$compile', ($compile) ->
 
   controller: ['$scope', ($scope) ->
     $scope.debug = -> window.Loomio.debug
+    
     if $scope.event.isSurface() && $scope.eventWindow.useNesting
       EventBus.listen $scope, 'replyButtonClicked', (e, parentEvent, comment) ->
         if $scope.event.id == parentEvent.id

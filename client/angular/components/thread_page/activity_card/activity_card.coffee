@@ -62,10 +62,8 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
       else
         $scope.waitingForPoll = false
       breakout_id = Session.user().discussionBreakouts[$scope.discussion.id]
-      console.log(breakout_id)
       # Only include breakouts up to most recent completed poll
       breakout_id.length = discussionStage
-      console.log(breakout_id)
       $scope.loader = new RecordLoader
         collection: 'events'
         params:

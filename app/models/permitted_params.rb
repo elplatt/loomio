@@ -126,4 +126,8 @@ class PermittedParams < Struct.new(:params)
   def document_attributes
     [:url, :title, :model_id, :model_type, :file, :filename]
   end
+  
+  def breakout_attributes
+    [:id, :treatment, :stage, :group, :prime, :remainder]
+  end
 end
