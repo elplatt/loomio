@@ -1,4 +1,4 @@
-class RemoveDiscussionUrlFromMotions < ActiveRecord::Migration
+class RemoveDiscussionUrlFromMotions < ActiveRecord::Migration[5.2]
   def up
     remove_column :motions, :discussion_url
   end

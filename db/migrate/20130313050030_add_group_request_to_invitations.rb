@@ -1,4 +1,4 @@
-class AddGroupRequestToInvitations < ActiveRecord::Migration
+class AddGroupRequestToInvitations < ActiveRecord::Migration[5.2]
   class Invitation < ActiveRecord::Base
     belongs_to :group_request
   end

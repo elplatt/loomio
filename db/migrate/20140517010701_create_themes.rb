@@ -1,4 +1,4 @@
-class CreateThemes < ActiveRecord::Migration
+class CreateThemes < ActiveRecord::Migration[5.2]
   def up
     create_table :themes do |t|
       t.text :style

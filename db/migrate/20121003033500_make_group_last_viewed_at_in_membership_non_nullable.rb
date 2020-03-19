@@ -1,4 +1,4 @@
-class MakeGroupLastViewedAtInMembershipNonNullable < ActiveRecord::Migration
+class MakeGroupLastViewedAtInMembershipNonNullable < ActiveRecord::Migration[5.2]
   class Membership < ActiveRecord::Base
   end
 

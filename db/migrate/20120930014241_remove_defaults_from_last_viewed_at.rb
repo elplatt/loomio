@@ -1,4 +1,4 @@
-class RemoveDefaultsFromLastViewedAt < ActiveRecord::Migration
+class RemoveDefaultsFromLastViewedAt < ActiveRecord::Migration[5.2]
   class Membership < ActiveRecord::Base
   end
 

@@ -1,4 +1,4 @@
-class CreateBlacklistedPasswords < ActiveRecord::Migration
+class CreateBlacklistedPasswords < ActiveRecord::Migration[5.2]
   def up
     create_table :blacklisted_passwords do |t|
       t.string :string

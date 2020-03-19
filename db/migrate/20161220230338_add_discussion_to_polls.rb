@@ -1,4 +1,4 @@
-class AddDiscussionToPolls < ActiveRecord::Migration
+class AddDiscussionToPolls < ActiveRecord::Migration[5.2]
   def change
     create_table :poll_did_not_votes do |t|
       t.belongs_to :poll

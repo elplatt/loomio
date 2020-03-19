@@ -1,4 +1,4 @@
-class RemoveGroupColumnFromMotions < ActiveRecord::Migration
+class RemoveGroupColumnFromMotions < ActiveRecord::Migration[5.2]
   def up
     Motion.all.each do |motion|
       if motion.discussion.blank?

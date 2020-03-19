@@ -1,4 +1,4 @@
-class RemovePayingSubscriptionFromGroupRequests < ActiveRecord::Migration
+class RemovePayingSubscriptionFromGroupRequests < ActiveRecord::Migration[5.2]
   def up
     remove_column :group_requests, :paying_subscription
   end

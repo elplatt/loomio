@@ -1,4 +1,4 @@
-class RemoveAccessLevelColumnFromInvitations < ActiveRecord::Migration
+class RemoveAccessLevelColumnFromInvitations < ActiveRecord::Migration[5.2]
   def up
     remove_column :invitations, :access_level
   end

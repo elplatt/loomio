@@ -1,4 +1,4 @@
-class AddPayingSubscriptionToGroups < ActiveRecord::Migration
+class AddPayingSubscriptionToGroups < ActiveRecord::Migration[5.2]
   def up
     add_column :groups, :paying_subscription, :boolean, default: false, null: false
   end

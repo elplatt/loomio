@@ -1,4 +1,4 @@
-class FixPrivacy < ActiveRecord::Migration
+class FixPrivacy < ActiveRecord::Migration[5.2]
   class Group < ActiveRecord::Base
   end
 

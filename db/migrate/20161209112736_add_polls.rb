@@ -1,4 +1,4 @@
-class AddPolls < ActiveRecord::Migration
+class AddPolls < ActiveRecord::Migration[5.2]
   def change
     create_table   :polls do |t|
       t.belongs_to :poll_template

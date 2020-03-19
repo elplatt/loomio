@@ -1,4 +1,4 @@
-class AddStanceChoices < ActiveRecord::Migration
+class AddStanceChoices < ActiveRecord::Migration[5.2]
   def change
     remove_column :stances, :poll_option_id
     remove_column :stances, :score

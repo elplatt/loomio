@@ -1,4 +1,4 @@
-class RemoveActivityFromDiscussions < ActiveRecord::Migration
+class RemoveActivityFromDiscussions < ActiveRecord::Migration[5.2]
   def up
     remove_column :discussions, :activity
   end

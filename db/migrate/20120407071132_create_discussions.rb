@@ -1,4 +1,4 @@
-class CreateDiscussions < ActiveRecord::Migration
+class CreateDiscussions < ActiveRecord::Migration[5.2]
   def change
     create_table :discussions do |t|
       t.references :group

@@ -1,4 +1,4 @@
-class RemoveUnusedCountColumns < ActiveRecord::Migration
+class RemoveUnusedCountColumns < ActiveRecord::Migration[5.2]
   def change
     remove_column :discussion_readers, :read_comments_count
     remove_column :discussions, :last_item_at

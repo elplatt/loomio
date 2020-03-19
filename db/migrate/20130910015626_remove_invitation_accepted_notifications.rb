@@ -1,4 +1,4 @@
-class RemoveInvitationAcceptedNotifications < ActiveRecord::Migration
+class RemoveInvitationAcceptedNotifications < ActiveRecord::Migration[5.2]
   def up
     Event.where(kind: "invitation_accepted").find_each do |event|
       event.notifications.destroy_all

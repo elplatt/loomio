@@ -1,4 +1,4 @@
-class RemoveInvitationTokenFromUsers < ActiveRecord::Migration
+class RemoveInvitationTokenFromUsers < ActiveRecord::Migration[5.2]
   def up
     remove_column :users, :invitation_token
   end

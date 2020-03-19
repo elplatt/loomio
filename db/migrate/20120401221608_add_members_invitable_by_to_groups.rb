@@ -1,4 +1,4 @@
-class AddMembersInvitableByToGroups < ActiveRecord::Migration
+class AddMembersInvitableByToGroups < ActiveRecord::Migration[5.2]
   class Group < ActiveRecord::Base
   end
   def up

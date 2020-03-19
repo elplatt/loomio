@@ -1,4 +1,4 @@
-class AddAdminToExistingGroups < ActiveRecord::Migration
+class AddAdminToExistingGroups < ActiveRecord::Migration[5.2]
   class Group < ActiveRecord::Base
   end
   def up

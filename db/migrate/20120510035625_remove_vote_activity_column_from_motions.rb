@@ -1,4 +1,4 @@
-class RemoveVoteActivityColumnFromMotions < ActiveRecord::Migration
+class RemoveVoteActivityColumnFromMotions < ActiveRecord::Migration[5.2]
   def up
     remove_column :motions, :vote_activity
   end

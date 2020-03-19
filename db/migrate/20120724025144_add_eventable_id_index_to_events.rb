@@ -1,4 +1,4 @@
-class AddEventableIdIndexToEvents < ActiveRecord::Migration
+class AddEventableIdIndexToEvents < ActiveRecord::Migration[5.2]
   def up
     add_index :events, :eventable_id
   end

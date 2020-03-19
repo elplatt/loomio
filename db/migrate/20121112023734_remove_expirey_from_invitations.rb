@@ -1,4 +1,4 @@
-class RemoveExpireyFromInvitations < ActiveRecord::Migration
+class RemoveExpireyFromInvitations < ActiveRecord::Migration[5.2]
   def up
     remove_column :invitations, :expirey
   end

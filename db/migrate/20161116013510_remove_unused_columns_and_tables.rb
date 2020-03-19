@@ -1,4 +1,4 @@
-class RemoveUnusedColumnsAndTables < ActiveRecord::Migration
+class RemoveUnusedColumnsAndTables < ActiveRecord::Migration[5.2]
   def change
     remove_column :groups, :hide_members
     remove_column :groups, :max_size

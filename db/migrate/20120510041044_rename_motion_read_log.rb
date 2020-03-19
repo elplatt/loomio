@@ -1,4 +1,4 @@
-class RenameMotionReadLog < ActiveRecord::Migration
+class RenameMotionReadLog < ActiveRecord::Migration[5.2]
   def up
     rename_table :motion_read_logs, :discussion_read_logs
   end
