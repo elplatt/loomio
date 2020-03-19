@@ -13,7 +13,13 @@ class DiscussionReader < ApplicationRecord
 
   after_create do |discussion_reader|
     if not user.is_admin
-      Breakout.for(discussion: self.discussion, stage: discussion.num_stages, user: discussion_reader.user)
+      if treatment == Discussion::SingleGroup
+        Breakout.single_for(discussion: discussion, stage: discussion.num_stages)
+      elsif treatment == Discussion::RandomNet
+        Breakout.random_for(discussion: discussion, sequence: sequence, stage: discussion.num_stages)
+      else
+        Breakout.for(discussion: self.discussion, stage: discussion.num_stages, user: discussion_reader.user)
+      end
     end
   end
 

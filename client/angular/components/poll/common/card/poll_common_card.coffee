@@ -11,6 +11,7 @@ angular.module('loomioApp').directive 'pollCommonCard', ->
   templateUrl: 'generated/components/poll/common/card/poll_common_card.html'
   replace: true
   controller: ['$scope', ($scope) ->
+    console.log $scope.poll
     $scope.isSiteAdmin = AbilityService.isSiteAdmin()
     
     Records.polls.findOrFetchById($scope.poll.key)

@@ -47,7 +47,7 @@ class Breakout < ApplicationRecord
     end
 
     def self.single_for(discussion:, stage:)
-        breakout = find_by(discussion: discussion, stage: stage)
+        breakout = find_by(discussion: discussion, stage: stage, treatment:Discussion::SingleGroup)
         if breakout.nil?
             breakout = create(discussion: discussion, treatment:Discussion::SingleGroup, stage:stage)
         end
