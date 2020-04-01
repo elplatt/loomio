@@ -31,4 +31,6 @@ Loomio::Application.configure do
 
   config.serve_static_files = true
   config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.default_url_options[:host] = "staging.deliberation.science"
 end
