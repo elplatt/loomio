@@ -21,8 +21,10 @@ module.exports = new class AuthService
     Records.sessions.build(
       _.pick(user, ['email', 'name', 'password'])
     ).save().then ->
+      alert "successful login"
       onSuccess()
     , () ->
+      alert "unsuccessful login"
       user.errors = if user.hasToken
         { token:    [I18n.t('auth_form.invalid_token')] }
       else
