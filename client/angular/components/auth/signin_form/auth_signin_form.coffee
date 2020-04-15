@@ -12,6 +12,7 @@ angular.module('loomioApp').directive 'authSigninForm', ->
     $scope.vars = {}
 
     $scope.signIn = ->
+      return
       EventBus.emit $scope, 'processing'
       $scope.user.name = $scope.vars.name if $scope.vars.name?
       AuthService.signIn($scope.user, hardReload).finally ->
@@ -26,6 +27,8 @@ angular.module('loomioApp').directive 'authSigninForm', ->
       AuthService.sendLoginLink($scope.user).finally -> EventBus.emit $scope, 'doneProcessing'
 
     $scope.submit = ->
+      alert('submitted')
+      return
       if $scope.user.hasPassword or $scope.user.hasToken
         $scope.signIn()
       else

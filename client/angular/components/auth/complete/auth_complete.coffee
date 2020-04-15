@@ -14,7 +14,10 @@ angular.module('loomioApp').directive 'authComplete', ->
     $scope.attempts = 0
 
     $scope.submit = submitForm $scope, $scope.session,
-      successCallback: -> hardReload()
+      successCallback: ->
+        console.log 'success'
+        console.log $scope
+        console.log $scope.session
       failureCallback: ->
         $scope.attempts += 1
         EventBus.emit $scope, 'doneProcessing'
