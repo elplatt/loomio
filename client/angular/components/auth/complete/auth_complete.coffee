@@ -13,19 +13,16 @@ angular.module('loomioApp').directive 'authComplete', ->
     $scope.session = Records.sessions.build(email: $scope.user.email)
     $scope.attempts = 0
 
-    $scope.xsubmit = submitForm $scope, $scope.session,
+    $scope.submit = submitForm $scope, $scope.session,
       successCallback: ->
         console.log 'success'
         console.log $scope
         console.log $scope.session
+        #hardReload()
       failureCallback: ->
         $scope.attempts += 1
         EventBus.emit $scope, 'doneProcessing'
       skipDoneProcessing: true
-    $scope.submit = ->
-      console.log('submit clicked')
-      alert('submit clicked')
-      $scope.xsubmit()
 
     submitOnEnter($scope, anyEnter: true)
   ]

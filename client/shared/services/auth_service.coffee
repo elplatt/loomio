@@ -18,12 +18,9 @@ module.exports = new class AuthService
     user
 
   signIn: (user = {}, onSuccess) ->
-    alert('Signing in')
-    return
     Records.sessions.build(
       _.pick(user, ['email', 'name', 'password'])
     ).save().then ->
-      alert "successful login"
       onSuccess()
     , () ->
       alert "unsuccessful login"
