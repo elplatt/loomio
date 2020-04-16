@@ -3,13 +3,18 @@ class API::SessionsController < Devise::SessionsController
   before_action :configure_permitted_parameters
 
   def create
-    if user = attempt_login
+    attempt_user = attempt_login
+    puts "Attempting login"
+    puts attempt_user
+    if user = attempt_user
       user.reactivate! if pending_login_token&.is_reactivation
       sign_in(user)
       flash[:notice] = t(:'devise.sessions.signed_in')
       user.update(name: resource_params[:name]) if resource_params[:name]
       render json: Boot::User.new(user).payload
+      puts "Logged in successfully"
     else
+      puts "Unable to log in"
       render json: { errors: { password: [t(:"user.error.bad_login")] } }, status: 401
     end
     session.delete(:pending_login_token)
