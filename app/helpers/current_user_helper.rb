@@ -14,6 +14,7 @@ module CurrentUserHelper
     puts "@current_user: " + @current_user.to_s
     puts "token_user: " + token_user.to_s
     puts "super: " + super.to_s
+    puts super.class
     puts "restricted_user: " + restricted_user.to_s
     @current_user ||= token_user || super || restricted_user || LoggedOutUser.new(locale: logged_out_preferred_locale)
   end
