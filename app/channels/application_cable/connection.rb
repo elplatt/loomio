@@ -3,12 +3,7 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      puts "ApplicationCable::connect"
-      puts self.current_user
-      STDOUT.flush
       self.current_user = user || membership || reject_unauthorized_connection
-      puts self.current_user
-      STDOUT.flush
     end
 
     private

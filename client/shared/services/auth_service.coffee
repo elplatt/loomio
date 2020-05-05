@@ -23,7 +23,6 @@ module.exports = new class AuthService
     ).save().then ->
       onSuccess()
     , () ->
-      alert "unsuccessful login"
       user.errors = if user.hasToken
         { token:    [I18n.t('auth_form.invalid_token')] }
       else
