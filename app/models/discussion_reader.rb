@@ -12,7 +12,7 @@ class DiscussionReader < ApplicationRecord
   update_counter_cache :discussion, :seen_by_count
 
   after_create do |discussion_reader|
-    if not user.is_admin
+    if not user.is_admin and not user.username == 'loomiohelperbot'
       if treatment == Discussion::SingleGroup
         Breakout.single_for(discussion: discussion, stage: discussion.num_stages)
       elsif treatment == Discussion::RandomNet

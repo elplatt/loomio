@@ -109,6 +109,7 @@ class Discussion < ApplicationRecord
   after_commit :update_stage
   
   def update_stage
+    return unless self.num_stages
     # Update breakouts
     stage = self.num_stages
     for dr in discussion_readers do
