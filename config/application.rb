@@ -107,7 +107,11 @@ module Loomio
         openssl_verify_mode: ENV.fetch('SMTP_SSL_VERIFY_MODE', 'none')
       }.compact
     else
-      config.action_mailer.delivery_method = :test
+      config.action_mailer.delivery_method = :sendmail
+      config.action_mailer.sendmail_settings = {
+        location: '/usr/sbin/sendmail',
+        arguments: '-i'
+      }
     end
 
     config.action_mailer.default_url_options = config.action_controller.default_url_options = {
