@@ -72,12 +72,12 @@ class Breakout < ApplicationRecord
                 if breakout.nil?
                     breakout = create(discussion:discussion, stage: stage, prime: g[:p], remainder: g[:remainder], group: g[:group], treatment:treatment)
                 end
-            end
-            if treatment == Discussion::RandomNet
+            elsif treatment == Discussion::RandomNet
                 breakout = random_for(discussion:discussion, sequence: sequence, stage: stage)
-            end
-            if treatment == Discussion::SingleGroup
+            elsif treatment == Discussion::SingleGroup
                 breakout = single_for(discussion:discussion, stage: stage)
+            else
+                return nil
             end
             breakout.users << user
         end

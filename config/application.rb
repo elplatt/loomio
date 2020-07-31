@@ -123,6 +123,11 @@ module Loomio
     config.action_mailer.asset_host = lmo_asset_host
     config.action_dispatch.tld_length = (ENV['TLD_LENGTH'] || 1).to_i
 
+#   Log email to file
+#    config.action_mailer.delivery_method = :file
+#    config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
+
+
     config.action_controller.include_all_helpers = false
 
     # expecting something like wss://hostname/cable, defaults to wss://canonical_host/cable

@@ -6,18 +6,24 @@ namespace :netdelib do
     desc "Create new users from list of emails."
     task :create_users => :environment do
         
+        added = []
         text = File.open(ENV['EMAILS']).read
         text.each_line do |line|
             email = line.strip!
+            if email.nil? or email.empty?
+                next
+            end
             while (User.find_by email:email).nil? do
                 name = COLORS.sample + ' ' + FLOWERS.sample
                 username = name.gsub(' ', '').downcase
                 if (User.find_by username:username).nil?
-                    User.create! name: name, email: email, username: username
-                    LoginTokenService.create(actor: user, uri: URI::parse 'http://deliberation.science/')
+                    user = User.create! name: name, email: email, username: username
+                    added << user
+                    LoginTokenService.create(actor: user, uri: URI::parse('http://deliberation.science/'))
                 end
             end
         end
-        
+        MembershipService.add_users_to_group(users:added, group:Group.find(ENV['GID']), inviter:User.find(1))
+
     end
 end
