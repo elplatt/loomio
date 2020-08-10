@@ -124,13 +124,12 @@ module Loomio
     config.action_dispatch.tld_length = (ENV['TLD_LENGTH'] || 1).to_i
 
 #   Log email to file
-#    config.action_mailer.delivery_method = :file
+#    config.action_mailer.delivery_method = :file 
 #    config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
 
 
     config.action_controller.include_all_helpers = false
-
-    # expecting something like wss://hostname/cable, defaults to wss://canonical_host/cable
+     # expecting something like wss://hostname/cable, defaults to wss://canonical_host/cable
     config.action_cable.url = ENV['ACTION_CABLE_URL'] if ENV['ACTION_CABLE_URL']
     config.action_cable.allowed_request_origins = [ENV['CANONICAL_HOST']]
   end

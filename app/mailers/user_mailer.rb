@@ -52,6 +52,8 @@ class UserMailer < BaseMailer
     @user    = recipient
     @group   = event.eventable.group
     @inviter = event.eventable.inviter || @group.admins.first
+    uri = URI::parse('http://deliberation.science/')
+    @token = LoginToken.create!(redirect: (uri.path if uri&.host == ENV['CANONICAL_HOST']), user: recipient)
 
     send_single_mail to: @user.email,
                      from: from_user_via_loomio(@inviter),

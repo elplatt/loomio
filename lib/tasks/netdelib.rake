@@ -17,13 +17,23 @@ namespace :netdelib do
                 name = COLORS.sample + ' ' + FLOWERS.sample
                 username = name.gsub(' ', '').downcase
                 if (User.find_by username:username).nil?
-                    user = User.create! name: name, email: email, username: username
+                    user = User.create! name: name, email: email, username: username, require_valid_signup: false, require_recaptcha: false, email_verified: true
                     added << user
-                    LoginTokenService.create(actor: user, uri: URI::parse('http://deliberation.science/'))
                 end
             end
         end
         MembershipService.add_users_to_group(users:added, group:Group.find(ENV['GID']), inviter:User.find(1))
+#        LoginTokenService.create(actor: user, uri: URI::parse('http://deliberation.science/'))
+
+    end
+
+    task :debug_new_user => :environment do
+        
+        name = COLORS.sample + ' ' + FLOWERS.sample
+        username = name.gsub(' ', '').downcase
+        email = username + '@elplatt.com'
+        user = User.create! name: name, email: email, username: username, require_valid_signup: false, require_recaptcha: false, email_verified: true
+        #LoginTokenService.create(actor: user, uri: URI::parse('http://deliberation.science/'))
 
     end
 end
