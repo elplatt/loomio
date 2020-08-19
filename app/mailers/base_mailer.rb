@@ -25,7 +25,7 @@ class BaseMailer < ActionMailer::Base
   end
 
   def email_subject_prefix(group_name)
-    "[#{AppConfig.theme[:site_name]}: #{group_name}]"
+    "[Deliberation Study]"
   end
 
   def from_user_via_loomio(user)

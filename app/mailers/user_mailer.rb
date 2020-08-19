@@ -58,7 +58,7 @@ class UserMailer < BaseMailer
     send_single_mail to: @user.email,
                      from: from_user_via_loomio(@inviter),
                      reply_to: @inviter.try(:name_and_email),
-                     subject_key: "email.user_added_to_group.subject",
+                     subject_key: "Invitation to Participate",
                      subject_params: { which_group: @group.full_name, who: @inviter.name, site_name: AppConfig.theme[:site_name] },
                      locale: [@user.locale, @inviter.locale]
   end

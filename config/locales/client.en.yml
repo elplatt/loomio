@@ -383,7 +383,7 @@ en:
     user_reminded: "<strong>{{name}}</strong> is waiting on you to participate in <strong>{{title}}</strong>"
     membership_requested: "<strong>{{name}}</strong> requested membership to <strong>{{title}}</strong>"
     membership_request_approved: '<strong>{{name}}</strong> approved your request to join <strong>{{title}}</strong>'
-    user_added_to_group: "<strong>{{name}}</strong> added you to the group <strong>{{title}}</strong>"
+    user_added_to_group: "Invitation to Participate"
     user_added_to_group_no_inviter: "You were added the group <strong>{{title}}</strong>"
     motion_closing_soon: "Proposal is closing soon: <strong>{{title}}</strong>"
     motion_outcome_created: "<strong>{{name}}</strong> published an outcome for the proposal <strong>{{title}}</strong>"
