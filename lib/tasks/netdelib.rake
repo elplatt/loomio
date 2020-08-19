@@ -1,6 +1,9 @@
-COLORS = ['Aqua', 'Beige', 'Black', 'Blue', 'Bronze', 'Brown', 'Cadet', 'Cadmium', 'Canary', 'Carmine', 'Carnation', 'Celadon', 'Celestial', 'Cerise', 'Cerulean', 'Charcoal', 'Chartreuse', 'Chestnut', 'Cinnabar', 'Cobalt', 'Copper', 'Cornflower', 'Forest', 'Fuchsia', 'Gold', 'Goldenrod', 'Gray', 'Green', 'Indigo', 'Lavender', 'Lemon', 'Madder', 'Magenta', 'Mahogany', 'Maize', 'Maroon', 'Melon', 'Midnight', 'Navy', 'Olive', 'Orange', 'Periwinkle', 'Pewter', 'Plum', 'Red', 'Saffron', 'Salmon', 'Scarlet', 'Seafoam', 'Sepia', 'Sienna', 'Silver', 'Slate', 'Sunset', 'Tan', 'Tangerine', 'Taupe', 'Teal', 'Turquoise', 'Ultramarine', 'Umber', 'Vermillion', 'Violet', 'Viridian', 'White', 'Yellow']
+TREES = ['Acacia','Ash', 'Aspen', 'Beech', 'Birch', 'Cedar', 'Cherry', 'Cottonwood', 'Elm', 'Eucalyptus', 'Fir', 'Hawthorn', 'Hazel', 'Hemlock', 'Hickory', 'Holly', 'Juniper', 'Larch', 'Laurel', 'Magnolia', 'Maple', 'Oak', 'Palm', 'Pine', 'Redbud', 'Redwood', 'Rowan', 'Sassafras', 'Sequoia', 'Spruce', 'Sycamore', 'Willow']
 
 FLOWERS = ['Acacia', 'Ageratum', 'Alpina', 'Aster', 'Belladonna', 'Bellflower', 'Boronia', 'Boxwood', 'Carnation', 'Carnation', 'Caspia', 'Celosia', 'Chrysanthemum', 'Clarkia', 'Cornflower', 'Cosmo', 'Craspedia', 'Daffodil', 'Dahlia', 'Daisy', 'Eucalyptus', 'Fern', 'Flax', 'Freesia', 'Gardenia', 'Gerbera', 'Ginger', 'Gladiolus', 'Heath', 'Heather', 'Helicona', 'Hydrangea', 'Iris', 'Jonquil', 'Larkspur', 'Lavender', 'Lilac', 'Lily', 'Limonium', 'Mum', 'Musa', 'Myrsine', 'Myrtle', 'Myrtus', 'Nerine', 'Nigella', 'Orchid', 'Paeonia', 'Peony', 'Pepperberry', 'Philodendron', 'Phlox', 'Plantain', 'Poinsettia', 'Poppy', 'Porium', 'Rose', 'Safflower', 'Sage', 'Salix', 'Snapdragon', 'Strawflower', 'Sunflower', 'Thistle', 'Tulip', 'Veronica', 'Wattle', 'Windflower', 'Yarrow', 'Zinna']
+
+FIRST = TREES
+LAST = FLOWERS
 
 namespace :netdelib do
     desc "Create new users from list of emails."
@@ -14,7 +17,7 @@ namespace :netdelib do
                 next
             end
             while (User.find_by email:email).nil? do
-                name = COLORS.sample + ' ' + FLOWERS.sample
+                name = FIRST.sample + ' ' + LAST.sample
                 username = name.gsub(' ', '').downcase
                 if (User.find_by username:username).nil?
                     user = User.create! name: name, email: email, username: username, require_valid_signup: false, require_recaptcha: false, email_verified: true

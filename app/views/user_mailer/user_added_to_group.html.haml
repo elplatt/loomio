@@ -1,11 +1,11 @@
-  %p.user-mailer__context
+%p.user-mailer__context
     You are receiving this message because you have registered to participate in a deliberation study run by the University of Michigan School of Information. This email contains important information on how to begin participating.
-  %p.user-mailer__message-container
+%p.user-mailer__message-container
     You have been assigned the alias "#{@user.name}". Your real name will not be visible to other participants, only your alias.
-  %p.user-mailer__message-container
+%p.user-mailer__message-container
     To begin your participation in this study, use the link below to access the study site.
     = link_to 'Sign in to UMSI Deliberation Study',
-      login_token_url(@token.token, @utm_hash),
-      data: { "skip-click": true },
-      class: "base-mailer__button base-mailer__button--primary"
+        login_token_url(@token.token, @utm_hash),
+        data: { "skip-click": true },
+        class: "base-mailer__button base-mailer__button--primary"
 
