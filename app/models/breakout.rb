@@ -1,7 +1,7 @@
 class Breakout < ApplicationRecord
 
     STAGE_PRIMES = [0, 2, 3, 5, 7, 11, 13, 17, 19, 23]
-    TEAM_SIZE = 2
+    TEAM_SIZE = 4
 
     belongs_to :discussion
     has_and_belongs_to_many :users, through: :breakouts_users
@@ -29,7 +29,8 @@ class Breakout < ApplicationRecord
             # First stage, just fill up groups as users arrive
             group = (sequence / TEAM_SIZE).floor
         else
-            high_group = discussion.breakouts.where(stage: 0).length - 1
+            user_count = Breakout.where(discussion:discussion, stage:0).map{|b| b.users.length}.sum
+            high_group = (user_count.to_f / TEAM_SIZE).ceil - 1
             groups = (0..high_group).select do |g|
                 # For each group, find current stage breakout
                 b = Breakout.find_by(discussion:discussion, treatment:Discussion::RandomNet, stage: stage, group: g)
@@ -55,6 +56,9 @@ class Breakout < ApplicationRecord
     end
 
     def self.for(discussion:, stage:, user:)
+        if user.is_admin
+            return nil
+        end
         # See if breakout already exists for user/discussion/stage
         breakout = user.breakouts.find_by(discussion: discussion, stage: stage)
         if breakout.nil?
