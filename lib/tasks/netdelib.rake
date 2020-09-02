@@ -44,11 +44,11 @@ namespace :netdelib do
         
         discussion = Discussion.find(ENV['DISCUSSION'])
         for poll in discussion.polls do
-            puts 'poll {#poll_id}'
+            puts 'poll #{poll_id}'
             for stance in poll.stances do
-                puts '  participant {#stance.participant_id}'
+                puts '  participant #{stance.participant_id}'
                 for choice in stance.stance_choices do
-                    puts '    {#choice.poll_option.name}: {#choice.score}'
+                    puts '    #{choice.poll_option.name}: #{choice.score}'
                 end
             end
         end
