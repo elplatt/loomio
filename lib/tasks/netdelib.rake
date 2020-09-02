@@ -47,7 +47,7 @@ namespace :netdelib do
             puts 'poll {#poll_id}'
             for stance in poll.stances do
                 puts '  participant {#stance.participant_id}'
-                for choice in stance.choices do
+                for choice in stance.stance_choices do
                     puts '    {#choice.poll_option.name}: {#choice.score}'
                 end
             end
