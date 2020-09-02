@@ -43,13 +43,18 @@ namespace :netdelib do
     task :export_results => :environment do
         
         discussion = Discussion.find(ENV['DISCUSSION'])
-        for poll in discussion.polls do
-            puts "poll #{poll.id}"
+        options = discussion.polls.order(:created_at).first.poll_options.order(:id)
+        cols = options.pluck(:name)
+        puts (['stage', 'participant_id'] + cols).join("\t")
+        
+        discussion.polls.order(:created_at).each_with_index do |poll, i|
             for stance in poll.stances do
-                puts "  participant #{stance.participant_id}"
+                row = {}
                 for choice in stance.stance_choices do
-                    puts "    #{choice.poll_option.name}: #{choice.score}"
+                    row[choice.poll_option.name] = choice.score
                 end
+                vals = [i, stance.participant_id] + cols.map { |c| row[c] }
+                puts vals.join("\t")
             end
         end
     end
