@@ -30,14 +30,16 @@ module.exports =
       _.each @collectionNames, (name) => @[_.camelCase(name)].setRemoteCallbacks(callbacks)
 
     defaultRemoteCallbacks: ->
-      onUploadSuccess: (data) => @import(data)
+      onUploadSuccess: (data) =>
+        @import(data)
       onSuccess: (response) =>
         if response.ok
           response.json().then (data) =>
             @import(data)
         else
           throw response
-      onFailure: (response) => throw response
+      onFailure: (response) =>
+        throw response
 
     bumpVersion: ->
       @_version = (@_version || 0) + 1

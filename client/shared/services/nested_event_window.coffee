@@ -52,7 +52,12 @@ module.exports = class NestedEventWindow extends BaseEventWindow
 
   # windowed Events
   windowedEvents: ->
-    query =
-      position:
-        $between: [@min, (@max || Number.MAX_VALUE)]
-    @eventsQuery().find(query).simplesort('position').data()
+# For some reason, this query excludes new comments until a user refreshes the page.
+# @max doesn't seem to be updated by the client js when a new comment is added
+# NetDelib fork doesn't need to limit this query anyway.
+#    query =
+#      position:
+#        $between: [@min, (@max || Number.MAX_VALUE)]
+#    events = @eventsQuery().find(query).simplesort('position').data()
+    events = @eventsQuery().simplesort('position').data()
+    events
