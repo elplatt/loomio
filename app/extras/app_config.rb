@@ -40,7 +40,7 @@ class AppConfig
       terms_url:                         ENV['TERMS_URL'],
       privacy_url:                       ENV['PRIVACY_URL'],
       icon_src:                          ENV.fetch('THEME_ICON_SRC',                '/theme/icon.png'),
-      app_logo_src:                      ENV.fetch('THEME_APP_LOGO_SRC',            '/theme/logo.svg'),
+      app_logo_src:                      ENV.fetch('THEME_APP_LOGO_SRC',            '/theme/logo.png'),
       default_group_cover_src:           ENV.fetch('THEME_DEFAULT_GROUP_COVER_SRC', '/theme/default_group_cover.png'),
       dont_notify_new_thread:            ENV['DONT_NOTIFY_NEW_THREAD'],
 

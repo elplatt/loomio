@@ -39,7 +39,8 @@ module.exports =
       @remote.fetch(args)
 
     importJSON: (json) ->
-      @import(utils.parseJSON(json))
+      parsed = @import(utils.parseJSON(json))
+      parsed
 
     import: (attributes) ->
       record = @find(attributes.key) if attributes.key?
