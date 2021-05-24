@@ -9,7 +9,7 @@ Session                  = require 'shared/services/session'
 { print } = require 'shared/helpers/window'
 
 angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) ->
-  scope: {discussion: '='}
+  scope: {discussion: '=', stage: '='}
   restrict: 'E'
   templateUrl: 'generated/components/thread_page/activity_card/activity_card.html'
   controller: ['$scope', ($scope) ->
@@ -61,9 +61,14 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
         $scope.waitingForPoll = true
       else
         $scope.waitingForPoll = false
-      breakout_id = Session.user().discussionBreakouts[$scope.discussion.id]
-      # Only include breakouts up to most recent completed poll
-      breakout_id.length = discussionStage
+      if typeof($scope.stage) == 'undefined'
+        breakout_id = Session.user().discussionBreakouts[$scope.discussion.id]
+        # Only include breakouts up to most recent completed poll
+        breakout_id.length = discussionStage
+      else
+        # Get only the breakout for the specified stage
+        console.log("Activity card stage " + $scope.stage)
+        breakout_id = parseInt(Session.user().discussionBreakouts[$scope.discussion.id][$scope.stage])
       $scope.loader = new RecordLoader
         collection: 'events'
         params:

@@ -42,7 +42,7 @@ class API::EventsController < API::RestfulController
   end
 
   def default_page_size
-    30
+    10000
   end
 
   # we always want to serialize out events in the events controller

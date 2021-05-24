@@ -15,6 +15,7 @@ module.exports = class RecordLoader
     @numLoaded  = 0
 
   fetchRecords: (opts = {}) ->
+    console.log(@params.breakout_id)
     @loading = true
     Records[_.camelCase(@collection)].fetch
       path:   @path

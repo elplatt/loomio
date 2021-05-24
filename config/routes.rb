@@ -115,6 +115,8 @@ Loomio::Application.routes.draw do
     resources :login_tokens, only: [:create]
 
     resources :events, only: :index do
+      # on keyword determines what types of routes are created
+      # see https://stackoverflow.com/questions/13064844/rails-routing-on-collection
       get :comment, on: :collection
       patch :remove_from_thread, on: :member
     end

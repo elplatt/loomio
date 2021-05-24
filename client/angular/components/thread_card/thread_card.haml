@@ -1,5 +1,8 @@
 .thread-card.lmo-card--no-padding
   %context_panel{ng-if: "isSiteAdmin || !waitingForPoll", discussion: "discussion"}
   %poll_common_card.lmo-card--no-padding{ng-if: "!isSiteAdmin && waitingForPoll", poll: "poll"}
-  %poll_common_card.lmo-card--no-padding{ng-if: "isSiteAdmin", poll: "poll", ng-repeat: "poll in discussion.activePolls() track by poll.id"}
-  %activity_card{discussion: "discussion", ng-if: "isSiteAdmin || (!waitingForPoll && discussion.createdEvent())"}
+  %activity_card{discussion: "discussion", stage: "discussionStage", ng-if: "isSiteAdmin"}
+  .stage{ng-repeat: "stage in [2, 1, 0]", ng-if: "!isSiteAdmin"}
+    %activity_card{discussion: "discussion", stage: "stage"}
+    
+  
