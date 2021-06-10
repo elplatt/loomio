@@ -10,6 +10,7 @@ module.exports = class NestedEventWindow extends BaseEventWindow
     @initialSequenceId = initialSequenceId
     @setMin(@positionFromSequenceId() || @firstLoaded())
     @setMax(@lastLoaded() || false)
+    @breakoutId = breakout_id
     @loader = new RecordLoader
       collection: 'events'
       params:
@@ -45,7 +46,9 @@ module.exports = class NestedEventWindow extends BaseEventWindow
   lastInSequence:  -> @parentEvent.childCount
 
   eventsQuery: ->
-    Records.events.collection.chain().find(parentId: @parentEvent.id)
+    # BreakoutId is added here because this sidesteps the RecordLoader
+    # Otherwise, previously fetched comments get included in this query
+    Records.events.collection.chain().find(parentId: @parentEvent.id).find(breakoutId: @breakoutId)
 
   loadedEvents: ->
     @eventsQuery().simplesort('position').data()
@@ -59,5 +62,6 @@ module.exports = class NestedEventWindow extends BaseEventWindow
 #      position:
 #        $between: [@min, (@max || Number.MAX_VALUE)]
 #    events = @eventsQuery().find(query).simplesort('position').data()
-    events = @eventsQuery().simplesort('position').data()
+
+    events = @eventsQuery().find(breakoutId: @breakoutId).simplesort('position').data()
     events

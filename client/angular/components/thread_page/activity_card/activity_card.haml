@@ -28,4 +28,4 @@
     .activity-card__load-more-sensor.lmo-no-print{in-view: "$inview && !eventWindow.loader.loadingMore && eventWindow.anyNext() && eventWindow.showNext()", in-view-options: "{throttle: 200}"}
     %loading.activity-card__loading.page-loading{ng-show: "eventWindow.loader.loadingMore"}
 
-  %add_comment_panel{ng-if: "eventWindow && !waitingForPoll", event_window: "eventWindow", parent_event: "discussion.createdEvent()"}
+  %add_comment_panel{ng-if: "eventWindow && !waitingForPoll && stage == 2", event_window: "eventWindow", parent_event: "discussion.createdEvent()"}
