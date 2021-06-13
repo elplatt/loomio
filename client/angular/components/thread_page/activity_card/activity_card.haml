@@ -1,4 +1,4 @@
-%section.activity-card{aria-labelledby: "activity-card-title"}
+%section.activity-card{aria-labelledby: "activity-card-title", style: "border-bottom: solid 1px rgb(220,220,220)"}
 
   %div{ng-if: "debug()"}
     first: {{eventWindow.firstInSequence()}}
@@ -20,6 +20,9 @@
     requestedSequenceId:  {{discussion.requestedSequenceId}}
     position: {{initialPosition()}}
 
+  .thread-item
+    %h2.lmo-h2
+      {{ title }}
   %loading_content.lmo-card-left-right-padding{ng-if: "loader.loading", block-count: 2}
   .activity-card__content{ng-if: "!loader.loading"}
     %ul.activity-card__activity-list
@@ -28,4 +31,4 @@
     .activity-card__load-more-sensor.lmo-no-print{in-view: "$inview && !eventWindow.loader.loadingMore && eventWindow.anyNext() && eventWindow.showNext()", in-view-options: "{throttle: 200}"}
     %loading.activity-card__loading.page-loading{ng-show: "eventWindow.loader.loadingMore"}
 
-  %add_comment_panel{ng-if: "eventWindow && !waitingForPoll && stage == 2", event_window: "eventWindow", parent_event: "discussion.createdEvent()"}
+  %add_comment_panel{ng-if: "eventWindow && !waitingForPoll && stage == discussion.numStages", event_window: "eventWindow", parent_event: "discussion.createdEvent()"}

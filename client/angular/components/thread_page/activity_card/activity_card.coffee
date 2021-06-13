@@ -69,6 +69,10 @@ angular.module('loomioApp').directive 'activityCard', ['$mdDialog', ($mdDialog) 
         # Get only the breakout for the specified stage
         console.log("Activity card stage " + $scope.stage)
         breakout_id = parseInt(Session.user().discussionBreakouts[$scope.discussion.id][$scope.stage])
+        if $scope.stage < $scope.discussion.numStages
+          $scope.title = "Past Discussion: Stage " + (1 + $scope.stage)
+        else
+          $scope.title = "Current Discussion: Stage " + (1 + $scope.stage)
       $scope.loader = new RecordLoader
         collection: 'events'
         params:
