@@ -9,7 +9,7 @@ I18n           = require 'shared/services/i18n'
 { eventHeadline, eventTitle, eventPollType } = require 'shared/helpers/helptext'
 
 angular.module('loomioApp').directive 'threadItem', ['$compile', ($compile) ->
-  scope: {event: '=', eventWindow: '='}
+  scope: {event: '=', eventWindow: '=', current: '='}
   restrict: 'E'
   templateUrl: 'generated/components/thread_page/thread_item/thread_item.html'
 

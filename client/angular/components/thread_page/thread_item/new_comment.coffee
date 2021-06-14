@@ -8,11 +8,12 @@ ModalService   = require 'shared/services/modal_service'
 { listenForTranslations, listenForReactions } = require 'shared/helpers/listen'
 
 angular.module('loomioApp').directive 'newComment', ['$rootScope', 'clipboard', ($rootScope, clipboard) ->
-  scope: {event: '=', eventable: '='}
+  scope: {event: '=', eventable: '=', 'current': '='}
   restrict: 'E'
   templateUrl: 'generated/components/thread_page/thread_item/new_comment.html'
   replace: true
   controller: ['$scope', ($scope) ->
+    console.log('new comment: ' + $scope.current)
     $scope.actions = [
       name: 'react'
       canPerform: -> AbilityService.canAddComment($scope.eventable.discussion())

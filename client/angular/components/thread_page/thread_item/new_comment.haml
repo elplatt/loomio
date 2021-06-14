@@ -6,7 +6,7 @@
 
   %document_list{model: "eventable", skip-fetch: "true"}
 
-  .lmo-md-actions
+  .lmo-md-actions{ng-if: "current"}
     %reactions_display{model: "eventable"}
     %action_dock{model: "eventable", actions: "actions"}
 
