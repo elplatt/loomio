@@ -13,7 +13,12 @@ angular.module('loomioApp').directive 'threadCard', ->
       if typeof(Session.user().discussionStages) == 'undefined' || typeof(discussionStage) == 'undefined'
         discussionStage = 0
       $scope.discussionStage = discussionStage
-      $scope.allStages = [0 .. $scope.discussion.numStages].reverse()
+      # Leave off current stage if discussion is closed
+      if $scope.discussion.closed 
+        $scope.allStages = [0 .. $scope.discussion.numStages].reverse()
+        $scope.allStages.shift()
+      else
+        $scope.allStages = [0 .. $scope.discussion.numStages].reverse()
       if discussionStage < $scope.discussion.numStages + 1
         polls = $scope.discussion.activePolls()
         if polls.length > 0
