@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_182552) do
+ActiveRecord::Schema.define(version: 2021_06_15_165318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_182552) do
     t.boolean "has_random_network"
     t.boolean "has_short_path_network"
     t.boolean "has_long"
+    t.boolean "closed"
     t.index ["author_id"], name: "index_discussions_on_author_id"
     t.index ["created_at"], name: "index_discussions_on_created_at"
     t.index ["group_id"], name: "index_discussions_on_group_id"
