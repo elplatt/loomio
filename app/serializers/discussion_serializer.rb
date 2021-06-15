@@ -18,6 +18,7 @@ class DiscussionSerializer < ActiveModel::Serializer
              :description,
              :num_stages,
              :num_breakouts,
+             :closed,
              :has_all,
              :has_random,
              :has_long,

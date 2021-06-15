@@ -437,6 +437,7 @@ en:
     privacy_organisation: 'The thread will be visible to members of {{parent}} and members of {{group}}.'
     fork_notice: 'A new thread will be created with {{count}} items from {{title}}'
     num_stages: 'Current stage'
+    closed: 'Discussion closed'
     has_single_group: 'Single group treatment'
     has_random_network: 'Random network treatment'
     has_long_path_network: 'Long path network treatment'

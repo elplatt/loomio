@@ -26,6 +26,11 @@
 
     .md-block.poll-common-multiple-choice.poll-common-checkbox-option
       .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
+        %h3{translate: "discussion_form.closed"}
+      %md-checkbox{ng-model: "discussion.closed"}
+      
+    .md-block.poll-common-multiple-choice.poll-common-checkbox-option
+      .poll-common-checkbox-option__text.md-list-item-text.lmo-flex--row
         %h3{translate: "discussion_form.has_single_group"}
       %md-checkbox{ng-model: "discussion.hasAll"}
       

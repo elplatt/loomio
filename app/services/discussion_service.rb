@@ -19,7 +19,7 @@ class DiscussionService
   def self.update(discussion:, params:, actor:)
     actor.ability.authorize! :update, discussion
 
-    discussion.assign_attributes(params.slice(:private, :title, :description, :num_stages, :has_random, :has_long, :has_all, :pinned))
+    discussion.assign_attributes(params.slice(:private, :title, :description, :closed, :num_stages, :has_random, :has_long, :has_all, :pinned))
     version_service = DiscussionVersionService.new(discussion: discussion, new_version: discussion.changes.empty?)
     discussion.assign_attributes(params.slice(:document_ids))
     discussion.document_ids = [] if params.slice(:document_ids).empty?
