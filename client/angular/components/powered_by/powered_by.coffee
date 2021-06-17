@@ -1,4 +1,5 @@
 AppConfig = require 'shared/services/app_config'
+Session         = require 'shared/services/session'
 angular.module('loomioApp').directive 'poweredBy', ->
   scope: {}
   restrict: 'E'
@@ -8,4 +9,6 @@ angular.module('loomioApp').directive 'poweredBy', ->
     $scope.termsUrl     = AppConfig.theme.terms_url
     $scope.frontPageUrl = AppConfig.baseUrl + "?frontpage"
     $scope.showFrontPage = AppConfig.baseUrl != "https://www.loomio.org/"
+    $scope.signOut = ->
+      Session.signOut()
   ]
