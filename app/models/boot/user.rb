@@ -19,9 +19,11 @@ module Boot
     private
 
     def user_payload
-      ActiveModel::ArraySerializer.new(Array(@user),
+      models = Array(@user)
+      each_serializer = (user.restricted ? Restricted::UserSerializer : Full::UserSerializer)
+      ActiveModel::ArraySerializer.new(models ,
         scope:           serializer_scope,
-        each_serializer: (user.restricted ? Restricted::UserSerializer : Full::UserSerializer),
+        each_serializer: each_serializer,
         root: :users
       ).as_json
     end
